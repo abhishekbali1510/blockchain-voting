@@ -1,20 +1,18 @@
 import "./App.css";
-// import {Connection} from "./components/Connection";
-// import Reterive from "./components/reterive";
-// import Store from "./components/store";
 import VoterRegistration from './components/VoterRegistration';
 import CandidateRegistration from './components/CandidateRegistration';
+import {Route,Routes} from 'react-router-dom';
+import {Connection} from './components/Connection';
 
 function App() {
   return (
     <>
-    {/* <h1>hello App</h1> */}
-    {/* <Connection />
-    
-    <Store />
-    <Reterive /> */}
-  <VoterRegistration></VoterRegistration>
-  <CandidateRegistration></CandidateRegistration>
+    <Connection />
+      <Routes>
+        <Route path="/voterRegister" element={<VoterRegistration/>} />
+        <Route path="/candidateRegister" element={<CandidateRegistration/>} />
+        {/* <Route path="/comp2" element={<Comp2/>} /> */}
+      </Routes>
     </>
   );
 }

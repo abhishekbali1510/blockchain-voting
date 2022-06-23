@@ -1,6 +1,6 @@
 import React from "react";
 import Web3 from "web3";
-import SimpleStorage from '../contracts/SimpleStorage.json';
+import SimpleStorage from '../contracts/election.json';
 
 export var contract;
 export var myAccount;
@@ -31,9 +31,7 @@ function Connection()
     
 
     return (
-        <>
-        
-        </>
+        <></>
     )
 }
 export {Connection};
