@@ -220,3 +220,100 @@ hr {
   background-color: #5beb34;
   align-self: center;
 }
+
+/*Voter Display css */
+.tab{
+  height: 500px;
+  width:100%;
+  table-layout: fixed;
+  border-top-left-radius: 4%;
+  border-top-right-radius: 4%;
+  border-bottom-right-radius: 4%;
+  border-bottom-left-radius: 4%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  background: whitesmoke;
+  position: relative;
+  margin-top: 0%;
+  margin: 0 auto;
+  
+}
+.tbl-header{
+  background-color: rgba(255,255,255,0.3);
+ }
+th{
+
+  margin-left: 1px;
+  width: 90%;
+}
+td{
+  width: 50%;
+}
+.imgBorder{
+  border: 5px solid #555;
+  border-radius: 9px;
+}
+
+/*File Upload css*/
+.files input {
+  outline: 2px dashed #0c0d0e;
+  outline-offset: -10px;
+  -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+  transition: outline-offset .15s ease-in-out, background-color .15s linear;
+  padding: 120px 0px 85px 35%;
+  text-align: center !important;
+  margin: 0;
+  width: 100% !important;
+}
+.files input:focus{     outline: 2px dashed #060808;  outline-offset: -10px;
+  -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+  transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #0a0c0c;
+}
+.files{ position:relative}
+.files:after {  pointer-events: none;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 50px;
+  right: 0;
+  height: 56px;
+  content: "";
+  background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
+  display: block;
+  margin: 0 auto;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.color input{ background-color:#0f0e0e;}
+.files:before {
+  position: absolute;
+  bottom: 10px;
+  left: 0;  pointer-events: none;
+  width: 100%;
+  right: 0;
+  height: 57px;
+  content: " or drag it here. ";
+  display: block;
+  margin: 0 auto;
+  color: #030505;
+  font-weight: 600;
+  text-transform: capitalize;
+  text-align: center;
+}
+.Register_button{
+  display: inline-block;
+  line-height: 40px;
+  padding: 0 20px;
+  color: snow;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: inherit;
+  background-color: #5beb34;
+  align-self: center;
+}
