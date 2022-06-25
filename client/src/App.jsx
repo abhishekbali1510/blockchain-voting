@@ -15,6 +15,7 @@ function App() {
         <Route path="/candidateRegister" element={<CandidateRegistration/>} />
         <Route path="/fileUpload" element={<FileUpload/>} />
         <Route path="/voterDisplay" element={<VoterDisplay/>} />
+        <Route path="/" element={<VoterDisplay/>} />
         {/* <Route path="/comp2" element={<Comp2/>} /> */}
       </Routes>
     </>
