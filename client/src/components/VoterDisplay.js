@@ -1,64 +1,110 @@
-import React from 'react';
-import logo1 from './logo1.jpg'
+import React, { useState } from "react";
+import { contract } from "./Connection";
+// import logo1 from "./12345.jpeg";
 function VoterDisplay() {
-    return (<>
-        <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
-        <div className="wrapper wrapper--w790">
-        <h1 align="center">Voter's Data</h1>
-            <div >
-                <form>
-                    <div>
-                        <h3 ><b>EPIC ID:</b></h3>
-                            <input name="epicId" type="text"></input> 
-                    </div>
-                </form>
-                
-            </div>
-            <br/><button type="button" className="button1">Success</button><br/><br/>
-            <div>
-            <div>
-            <center><img src={logo1} height={200} width={200} className="imgBorder"></img></center>
-            </div>
-            <font size="5" face="Courier New" >
-                <table className='tab' cellPadding="0" cellSpacing="0">    
-                <tr>
-                    <th >Epic Id</th>
-                    <td>123</td>
-                </tr>
-                <tr>
-                    <th>Name</th>
-                    <td>Meenal</td>
-                </tr>
-                <tr>
-                    <th >Email</th>
-                    <td>meenal199s</td>
-                </tr>
-                <tr>
-                    <th>Address</th>
-                    <td>Vasant Vihar </td>
-                </tr>
-                <tr>
-                    <th>DOB</th>
-                    <td>6722</td>
-                </tr>
-                <tr>
-                    <th>Phone number</th>
-                    <td>2321090</td>
-                </tr>
-                <tr>
-                    <th>Gender</th>
-                    <td>FEmale</td>
-                </tr>
-                <tr>
-                    <th>Father's Name</th>
-                    <td>XYZ</td>
-                </tr>
-                </table>
-               </font> 
-            </div> 
-        </div>     
-        </div>
-      </>);
-    }
+  
+  var [epicId, setepicId] = useState("");
+  var [name, setname] = useState("");
+  var [fatherName, setfatherName] = useState("");
+  var [email, setemail] = useState("");
+  var [address, setaddress] = useState("");
+  var [dob, setdob] = useState("");
+  var [phone, setphone] = useState("");
+  var [gender, setgender] = useState("");
+  var [imgname, setimagename] = useState("");
 
-export default VoterDisplay
+    function fetchData(){
+    contract.methods.showVoterInfo(epicId).call((err, data) => {
+        // console.log("data : ",data);
+        setname(data.voterName);
+        setfatherName(data.voterFatherName);
+        setemail(data.voterEmail);
+        setphone(data.voterMobile);
+        setgender(data.voterGender);
+        setaddress(data.voterAddress);
+        setdob(data.voterDOB);
+        setimagename("/voterPic/"+epicId+".jpeg");
+      });
+  };
+
+  return (
+    <>
+      <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div className="wrapper wrapper--w790">
+          <h1 align="center">Voter's Data</h1>
+          <div>
+            <form>
+              <div>
+                <h3>
+                  <b>EPIC ID:</b>
+                </h3>
+                <input
+                  name="epicId"
+                  value={epicId}
+                  onChange={(event) => setepicId(event.target.value)}
+                  type="text"
+                ></input>
+              </div>
+            </form>
+          </div>
+          <br />
+          <button type="button" onClick={fetchData()} className="button1">
+            Success
+          </button>
+          <br />
+          <br />
+          <div>
+            <div>
+              <center>
+                <img
+                  src={imgname}
+                  height={200}
+                  width={200}
+                  className="imgBorder"
+                ></img>
+              </center>
+            </div>
+            <font size="5" face="Courier New">
+              <table className="tab" cellPadding="0" cellSpacing="0">
+                <tr>
+                  <th>Epic Id</th>
+                  <td>{epicId}</td>
+                </tr>
+                <tr>
+                  <th>Name</th>
+                  <td>{name}</td>
+                </tr>
+                <tr>
+                  <th>Father's Name</th>
+                  <td>{fatherName}</td>
+                </tr>
+                <tr>
+                  <th>Email</th>
+                  <td>{email}</td>
+                </tr>
+                <tr>
+                  <th>Address</th>
+                  <td>{address} </td>
+                </tr>
+                <tr>
+                  <th>DOB</th>
+                  <td>{dob}</td>
+                </tr>
+                <tr>
+                  <th>Phone number</th>
+                  <td>{phone}</td>
+                </tr>
+                <tr>
+                  <th>Gender</th>
+                  <td>{gender}</td>
+                </tr>
+              </table>
+            </font>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default VoterDisplay;

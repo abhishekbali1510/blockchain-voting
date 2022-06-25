@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { contract, myAccount, Connection } from "./Connection";
+import { contract, myAccount } from "./Connection";
 import axios from "axios";
 
 class VoterRegistration extends Component {

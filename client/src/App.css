@@ -255,17 +255,17 @@ td{
 }
 
 /*File Upload css*/
-.files input {
+.files button {
   outline: 2px dashed #0c0d0e;
   outline-offset: -10px;
   -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
   transition: outline-offset .15s ease-in-out, background-color .15s linear;
-  padding: 120px 0px 85px 35%;
+  padding: 100px 0px 85px 35%;
   text-align: center !important;
   margin: 0;
   width: 100% !important;
 }
-.files input:focus{     outline: 2px dashed #060808;  outline-offset: -10px;
+.files button:focus{     outline: 2px dashed #060808;  outline-offset: -10px;
   -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
   transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #0a0c0c;
 }
@@ -292,7 +292,7 @@ td{
   width: 100%;
   right: 0;
   height: 57px;
-  content: " or drag it here. ";
+  content: " drag your csv file here. ";
   display: block;
   margin: 0 auto;
   color: #030505;
@@ -316,4 +316,14 @@ td{
   font-family: inherit;
   background-color: #5beb34;
   align-self: center;
+}
+
+.csvButton
+{
+  color: black;
+  /* position: fixed; */
+ margin-left:100px ;
+ width: 50px;
+ border: black 1px solid;
+ background-color: #efefef;
 }
