@@ -67,6 +67,12 @@ class VoterRegistration extends Component {
       this.state.father_first_name + " " + this.state.father_last_name;
     var mobile = this.state.area_code + this.state.phone;
 
+    // send registration  mail to voter 
+    const votermail = {'mail':this.state.email};
+    axios.post("http://localhost:5000/mail",votermail,{})
+    .then((res)=>console.log(res));
+
+
     // send image to folder
     const data = new FormData();
     data.append("file", this.state.selectedFile);
