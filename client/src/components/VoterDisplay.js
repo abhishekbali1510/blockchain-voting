@@ -15,7 +15,7 @@ function VoterDisplay() {
 
     function fetchData(){
     contract.methods.showVoterInfo(epicId).call((err, data) => {
-        // console.log("data : ",data);
+        console.log("data : ",data);
         setname(data.voterName);
         setfatherName(data.voterFatherName);
         setemail(data.voterEmail);
@@ -26,6 +26,11 @@ function VoterDisplay() {
         setimagename("/voterPic/"+epicId+".jpeg");
       });
   };
+
+//    async function fetchData(){
+//     var data=await contract.methods.showVoterInfo(epicId).call();
+//     console.log("data : ",data);
+// }
 
   return (
     <>
@@ -66,6 +71,7 @@ function VoterDisplay() {
             </div>
             <font size="5" face="Courier New">
               <table className="tab" cellPadding="0" cellSpacing="0">
+              <tbody>
                 <tr>
                   <th>Epic Id</th>
                   <td>{epicId}</td>
@@ -98,6 +104,7 @@ function VoterDisplay() {
                   <th>Gender</th>
                   <td>{gender}</td>
                 </tr>
+                </tbody>
               </table>
             </font>
           </div>
