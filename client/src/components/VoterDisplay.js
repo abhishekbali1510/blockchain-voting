@@ -44,6 +44,7 @@ function VoterDisplay() {
                   <b>EPIC ID:</b>
                 </h3>
                 <input
+                  className="input-meenal"
                   name="epicId"
                   value={epicId}
                   onChange={(event) => setepicId(event.target.value)}

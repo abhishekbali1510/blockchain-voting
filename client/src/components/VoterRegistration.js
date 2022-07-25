@@ -116,7 +116,7 @@ class VoterRegistration extends Component {
                     <div className="value">
                       <div className="input-group">
                         <input
-                          className="input--style-5"
+                          className="input--style-5 input-meenal"
                           type="text"
                           value={this.state.Epic_id}
                           onChange={this.handleEpicChange}
@@ -132,7 +132,7 @@ class VoterRegistration extends Component {
                         <div className="col-2">
                           <div className="input-group-desc">
                             <input
-                              className="input--style-5"
+                              className="input--style-5 input-meenal"
                               type="text"
                               value={this.state.first_name}
                               onChange={this.handleFirstNameChange}
@@ -144,7 +144,7 @@ class VoterRegistration extends Component {
                         <div className="col-2">
                           <div className="input-group-desc">
                             <input
-                              className="input--style-5"
+                              className="input--style-5 input-meenal"
                               type="text"
                               value={this.state.last_name}
                               onChange={this.handleLastNameChange}
@@ -163,7 +163,7 @@ class VoterRegistration extends Component {
                         <div className="col-2">
                           <div className="input-group-desc">
                             <input
-                              className="input--style-5"
+                              className="input--style-5 input-meenal"
                               type="text"
                               value={this.state.father_first_name}
                               onChange={this.handleFatherFirstNameChange}
@@ -175,7 +175,7 @@ class VoterRegistration extends Component {
                         <div className="col-2">
                           <div className="input-group-desc">
                             <input
-                              className="input--style-5"
+                              className="input--style-5 input-meenal"
                               type="text"
                               value={this.state.father_last_name}
                               onChange={this.handleFatherLastNameChange}
@@ -192,7 +192,7 @@ class VoterRegistration extends Component {
                     <div className="value">
                       <div className="input-group">
                         <input
-                          className="input--style-5"
+                          className="input--style-5 input-meenal"
                           type="email"
                           value={this.state.email}
                           onChange={this.handleEmailChange}
@@ -206,7 +206,7 @@ class VoterRegistration extends Component {
                     <div className="value">
                       <div className="input-group">
                         <input
-                          className="input--style-5"
+                          className="input--style-5 input-meenal"
                           type="address"
                           value={this.state.address}
                           onChange={this.handleAddressChange}
@@ -220,7 +220,7 @@ class VoterRegistration extends Component {
                     <div className="value">
                       <div className="input-group">
                         <input
-                          className="input--style-5"
+                          className="input--style-5 input-meenal"
                           type="date"
                           value={this.state.dob}
                           onChange={this.handleDobChange}
@@ -236,7 +236,7 @@ class VoterRegistration extends Component {
                         <div className="col-3">
                           <div className="input-group-desc">
                             <input
-                              className="input--style-5"
+                              className="input--style-5 input-meenal"
                               type="text"
                               value={this.state.area_code}
                               onChange={this.handleAreaChange}
@@ -248,7 +248,7 @@ class VoterRegistration extends Component {
                         <div className="col-9">
                           <div className="input-group-desc">
                             <input
-                              className="input--style-5"
+                              className="input--style-5 input-meenal"
                               type="text"
                               value={this.state.phone}
                               onChange={this.handlePhoneChange}

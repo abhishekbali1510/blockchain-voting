@@ -11,7 +11,7 @@ function CheckVoter() {
     }
     else
     {
-        setmail("");
+        setmail("not exist");
     }
   }
   const [epic, setepic] = useState("");

@@ -12,16 +12,16 @@ app.use(cors({
     origin: '*'
 }));
 
-app.post("/mail", cors(), (req, res) => {
-  console.log(req.body.mail);
-
-  var transporter = nodemailer.createTransport({
+var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: "abhishekbali15oct@gmail.com",
       pass: "eudaxkznypavaihq",
     },
   });
+
+app.post("/mail", cors(), (req, res) => {
+  console.log(req.body.mail);
 
   var mailOptions = {
     from: "abhishekbali15oct@gmail.com",
@@ -41,4 +41,25 @@ app.post("/mail", cors(), (req, res) => {
   res.send({ status: "200" });
 });
 
-app.listen(5000, () => console.log(`Listening on port `))
+app.post("/mailOtp",cors(),(req,res)=>{
+
+  var mailOptions = {
+    from: "abhishekbali15oct@gmail.com",
+    to: req.body.mail,
+    subject: "Registration sucessfull",
+    text: `Dear voter ,123456 ${req.body.otp} is your otp for login `,
+  };
+
+  transporter.sendMail(mailOptions,(err,info)=>{
+    if(err)
+    {
+      console.log(err);
+    }
+    else{
+      console.log("otp sent : ",info);
+    }
+  })
+  res.send({ status: "200" });
+});
+
+app.listen(5000, () => console.log(`Listening on port 5000`))
