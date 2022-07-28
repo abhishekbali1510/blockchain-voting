@@ -47,7 +47,7 @@ app.post("/mailOtp",cors(),(req,res)=>{
     from: "abhishekbali15oct@gmail.com",
     to: req.body.mail,
     subject: "Registration sucessfull",
-    text: `Dear voter ,123456 ${req.body.otp} is your otp for login `,
+    text: `Dear voter ,${req.body.otp} is your otp for login `,
   };
 
   transporter.sendMail(mailOptions,(err,info)=>{
