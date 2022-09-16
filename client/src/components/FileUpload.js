@@ -23,27 +23,26 @@ function FileUpload() {
                 // console.log(results.data[temp][1]);
                 // console.log(results.data);
                 contract.methods
-      .registerVoter(
-        results.data[temp][0],
-        results.data[temp][1],
-        results.data[temp][2],
-        results.data[temp][3],
-        results.data[temp][4],
-        results.data[temp][5],
-        results.data[temp][6],
-        results.data[temp][7]
-      )
-      .send({ from: myAccount, gas: 800000 });
-      console.log(temp);
+                  .registerVoter(
+                    results.data[temp][0],
+                    results.data[temp][1],
+                    results.data[temp][2],
+                    results.data[temp][3],
+                    results.data[temp][4],
+                    results.data[temp][5],
+                    results.data[temp][6],
+                    results.data[temp][7]
+                  )
+                  .send({ from: myAccount, gas: 800000 });
+                console.log(temp);
               }
             }}
           >
             {({ getRootProps, acceptedFile }) => (
               <>
-                <button
-                  class="form-control "
-                  {...getRootProps()}
-                ><p className="csvButton">Browse</p></button>
+                <button class="form-control " {...getRootProps()}>
+                  <p className="csvButton">Browse</p>
+                </button>
                 {/* <input {...getRootProps()} type="file" className="form-control" multiple="" /> */}
                 <div>{acceptedFile && acceptedFile.name}</div>
               </>

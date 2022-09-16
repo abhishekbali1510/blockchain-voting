@@ -15,8 +15,8 @@ app.use(cors({
 var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "abhishekbali15oct@gmail.com",
-      pass: "eudaxkznypavaihq",
+      user: "testmailabhi15@gmail.com",
+      pass: "qijvaydfnbyogewu",
     },
   });
 
@@ -24,7 +24,7 @@ app.post("/mail", cors(), (req, res) => {
   console.log(req.body.mail);
 
   var mailOptions = {
-    from: "abhishekbali15oct@gmail.com",
+    from: "testmailabhi15@gmail.com",
     to: req.body.mail,
     subject: "Registration sucessfull",
     text: `Dear voter , you are registered for online voting . Thank you`,
@@ -41,10 +41,34 @@ app.post("/mail", cors(), (req, res) => {
   res.send({ status: "200" });
 });
 
+
+app.post("/candidateMail", cors(), (req, res) => {
+  console.log(req.body.mail);
+
+  var mailOptions = {
+    from: "testmailabhi15@gmail.com",
+    to: req.body.mail,
+    subject: "Registration sucessfull",
+    text: `Dear Candidate , you are registered as a succesfull candidate . Thank you`,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+
+  res.send({ status: "200" });
+});
+
+
+
 app.post("/mailOtp",cors(),(req,res)=>{
 
   var mailOptions = {
-    from: "abhishekbali15oct@gmail.com",
+    from: "testmailabhi15@gmail.com",
     to: req.body.mail,
     subject: "Registration sucessfull",
     text: `Dear voter ,${req.body.otp} is your otp for login `,

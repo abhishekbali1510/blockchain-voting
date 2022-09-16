@@ -47,7 +47,10 @@ contract election
     {
         string id;
         string candidateName;
-        string party;
+        string partyName;
+        string candidateEmail;
+        string candidateFatherName;
+        string candidateMobile;
         string candidateAddress;
         string candidateDOB;
         string candidateGender;
@@ -58,9 +61,9 @@ contract election
     mapping(string => uint) public candidateSearch ;      // id => index
 
     // stores candidate info on blockchain
-    function registerCandidate(string memory _id,string memory _candidateName,string memory party,string memory _candidateAddress,string memory _candidateDOB,string memory _candidateGender) public 
+    function registerCandidate(string memory _id,string memory _candidateName,string memory _party,string memory __candidateEmail,string memory _candidateFatherName,string memory _candidateMobile,string memory _candidateAddress,string memory _candidateDOB,string memory _candidateGender) public 
     {
-        allCandidates.push( candidateInfo(_id,_candidateName,party,_candidateAddress,_candidateDOB,_candidateGender) );
+        allCandidates.push( candidateInfo(_id,_candidateName,_party,__candidateEmail,_candidateFatherName,_candidateMobile,_candidateAddress,_candidateDOB,_candidateGender) );
         candidateSearch[_id]=allCandidates.length-1;
     
     }

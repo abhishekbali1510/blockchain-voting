@@ -3,19 +3,22 @@ import { useEffect } from "react";
 import { contract } from "./Connection";
 function CheckVoter() {
   async function fetchdata() {
-    var data = await contract.methods.showVoterInfo(epic).call();
-    console.log("data:", data);
-    if (data.epic !== "") {
-      setmail(data.voterEmail);
-    } else {
-      setmail("not exist");
+    var data=await contract.methods.showCandidateInfo(uniq_id).call();
+    console.log("data:",data);
+    if(data.uniq_id!=="") 
+    {
+        setmail(data.voterEmail);
+    }
+    else
+    {
+        setmail("not exist");
     }
   }
-  const [epic, setepic] = useState("");
+  const [uniq_id, setepic] = useState("");
   const [mail, setmail] = useState("");
-  useEffect(() => {
-    fetchdata();
-  });
+  useEffect(()=>{
+    fetchdata()
+  })
   return (
     <div>
       hello
