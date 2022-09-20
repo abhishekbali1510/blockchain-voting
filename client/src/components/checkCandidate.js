@@ -18,7 +18,7 @@ function CheckVoter() {
   const [mail, setmail] = useState("");
   useEffect(()=>{
     fetchdata()
-  })
+  });
   return (
     <div>
       hello

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ReactSession } from 'react-client-session';
 import { contract } from "./Connection";
 
 function VoterLogin() {
   const [epic, setEpic] = useState("");
-  const [otpSent, setOtp] = useState("");
+  const [otpSent, setOtp] = useState("xxxxxxxxx");
   const [userOtp, setUserOtp] = useState("");
   // const [loginButton,loginSuccess] = useState("true");
   const [userData, setUserData] = useState("");
 
+  // ReactSession.setStoreType("memory");
   function handleEpicIdChange(e) {
     e.preventDefault();
     setEpic(e.target.value);
@@ -21,7 +23,10 @@ function VoterLogin() {
   async function sendOtp() {
     var data = await contract.methods.showVoterInfo(epic).call();
     console.log(data.voterEmail);
-    if (data.voterEmail === "") console.log("not registered");
+    if (data.voterEmail === "") {
+    	console.log("not registered");
+    	alert("not registered");
+    }
     else {
       setUserData(data);
       var tmpOtp = Math.floor(Math.random() * 1000000);
@@ -38,8 +43,13 @@ function VoterLogin() {
     if (userOtp == otpSent) {
       console.log("VERIFIED");
       console.log(userData);
+      ReactSession.set("userData", userData);
+      ReactSession.set("userLoginCheck", true);
+      console.warn(ReactSession.get("userData"));
+      sessionStorage.setItem("name","abhi");  
     } else {
       console.log("FAILED");
+      alert("Wrong otp");
     }
   }
   return (

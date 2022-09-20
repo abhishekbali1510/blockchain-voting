@@ -9,6 +9,7 @@ import FileUpload from "./components/FileUpload";
 import CheckVoter from "./components/checkVoter";
 import CheckCandidate from "./components/checkCandidate";
 import VoterLogin from "./components/VoterLogin";
+import Voting from "./components/Voting";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
         <Route path="/fileUpload" element={<FileUpload />} />
 
         <Route path="/voterDisplay" element={<VoterDisplay />} />
+
+        <Route path="/voting" element={<Voting />} />
 
         <Route path="/" element={<VoterDisplay />} />
       </Routes>
