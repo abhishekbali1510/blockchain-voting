@@ -1,37 +1,49 @@
 import React, { useState } from "react";
-// import vote from "./voted.png";
-// import vote_logo from "./vote_logo.png";
+import vote from "../voted.png";
+import vote_logo from "../vote_logo.png";
 import {contract} from "./Connection";
 import {useEffect} from "react";
 import { ReactSession } from 'react-client-session';
 
 function Voting() {
   const [vot, setVoter] = useState();
-  const [totalVoters, setTotalVoters] = useState(0);
+  const [totalCandidates, setTotalCandidates] = useState(0);
   
-  async function fetchTotalVoters(){
-    setTotalVoters(await contract.methods.totalCandidates().call());
+  async function fetchTotalCandidates(){
+    setTotalCandidates(await contract.methods.totalCandidates().call());
   }
   
-
+  async function fetchAllCandidates()
+  {
+    
+    for(let i=0;i<await contract.methods.totalCandidates().call();i++)
+    {
+      let data=await contract.methods.fetchCandidateByIndex(i).call();
+      console.log(data.candidateName)
+    }
+    
+  }
   function onChangeValue(event) {
     setVoter(event.target.value);
     console.log(event.target.value);
   }
 
-  console.log(ReactSession.get("userData"));
-  console.log(sessionStorage.getItem("name"));
+  // console.log(ReactSession.get("userData"));
+  // console.log(sessionStorage.getItem("name"));
   useEffect(()=>{
-    fetchTotalVoters();
+    fetchTotalCandidates();
+    fetchAllCandidates();
+
+    
   },[]);
 
 
   return (
-    <div class="back_color">
-      {/*<img class="logoVoting" src={vote_logo}></img>*/}
+    <div className="back_color">
+      <img className="logoVoting" src={vote_logo}></img>
       <div className="infor">
         <b>
-          <i>{totalVoters}</i><br/>
+          <i>{totalCandidates}</i><br/>
         </b>
         <b> NAME: {ReactSession.get("userData")}</b>
         <br />
@@ -47,7 +59,7 @@ function Voting() {
           CHOOSE THE PARTY FOR VOTING
         </font>
       </center>
-      <div class="table">
+      <div className="table">
         <tr>
           <font face="Bedrock" size="5">
             {" "}
@@ -63,7 +75,7 @@ function Voting() {
         <tr>
           <center>
             <td>
-              {/*<img src={vote} height={100} width={100} alt="P1"></img>*/}
+              <img src={vote} height={100} width={100} alt="P1"></img>
             </td>
           </center>
           <td className="wid">
@@ -79,7 +91,7 @@ function Voting() {
         <tr>
           <center>
             <td>
-              {/*<img src={vote} height={100} width={100} alt="P2"></img>*/}
+              <img src={vote} height={100} width={100} alt="P2"></img>
             </td>
           </center>
           <td className="wid">

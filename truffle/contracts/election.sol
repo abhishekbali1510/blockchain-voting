@@ -80,6 +80,9 @@ contract election
         return allCandidates.length;
     }
 
-
+    function fetchCandidateByIndex(uint _index) view public returns(candidateInfo memory)
+    {
+        return allCandidates[_index];
+    }
 
 }
