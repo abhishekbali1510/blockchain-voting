@@ -3,7 +3,7 @@ import vote from "../voted.png";
 import vote_logo from "../vote_logo.png";
 import {contract} from "./Connection";
 import {useEffect} from "react";
-import { ReactSession } from 'react-client-session';
+// import { ReactSession } from 'react-client-session';
 
 function Voting() {
   const [vot, setVoter] = useState();
@@ -11,6 +11,7 @@ function Voting() {
   
   async function fetchTotalCandidates(){
     setTotalCandidates(await contract.methods.totalCandidates().call());
+    console.log(localStorage.getItem("userSessionData"));
   }
   
   async function fetchAllCandidates()
@@ -41,13 +42,13 @@ function Voting() {
   return (
     <div className="back_color">
       <img className="logoVoting" src={vote_logo}></img>
-      <div className="infor">
+     <div>
         <b>
-          <i>{totalCandidates}</i><br/>
+          {/*<i>{totalCandidates}</i><br/>*/}
         </b>
-        <b> NAME: {ReactSession.get("userData")}</b>
+        <b> NAME: {localStorage.getItem("userSessionData").split(',')[1]}</b>
         <br />
-        <b>EPIC ID: 03322140</b>
+        <b>EPIC ID: {localStorage.getItem("userSessionData").split(',')[0]}</b>
       </div>
       <br />
       <br />
@@ -59,7 +60,7 @@ function Voting() {
           CHOOSE THE PARTY FOR VOTING
         </font>
       </center>
-      <div className="table">
+      <div className="table1">
         <tr>
           <font face="Bedrock" size="5">
             {" "}

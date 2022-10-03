@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { ReactSession } from 'react-client-session';
+import  { useNavigate } from 'react-router-dom';
 import { contract } from "./Connection";
 
 function VoterLogin() {
@@ -9,7 +9,7 @@ function VoterLogin() {
   const [userOtp, setUserOtp] = useState("");
   // const [loginButton,loginSuccess] = useState("true");
   const [userData, setUserData] = useState("");
-
+  localStorage.setItem("testSession","abhi");
   // ReactSession.setStoreType("memory");
   function handleEpicIdChange(e) {
     e.preventDefault();
@@ -38,15 +38,20 @@ function VoterLogin() {
       alert("OTP sent succesfully");
     }
   }
-
+let navigate = useNavigate();
   function checkOtp() {
     if (userOtp == otpSent) {
       console.log("VERIFIED");
       console.log(userData);
-      ReactSession.set("userData", userData);
-      ReactSession.set("userLoginCheck", true);
-      console.warn(ReactSession.get("userData"));
-      sessionStorage.setItem("name","abhi");  
+      // ReactSession.set("userData", userData);
+      // ReactSession.set("userLoginCheck", true);
+      // console.warn(ReactSession.get("userData"));
+      
+    // Somewhere in your code, e.g. inside a handler:
+      navigate("/voting");
+      localStorage.setItem("userSessionData",userData);
+      
+
     } else {
       console.log("FAILED");
       alert("Wrong otp");

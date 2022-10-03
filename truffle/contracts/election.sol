@@ -54,6 +54,7 @@ contract election
         string candidateAddress;
         string candidateDOB;
         string candidateGender;
+        uint totalVotes;
         
     }
 
@@ -84,5 +85,10 @@ contract election
     {
         return allCandidates[_index];
     }
+
+    //function checkVoted(string memory _epic) view public returns(bool)
+    //{
+      //  retuallVoters[voterSearch[_epic]].isVoted
+    //}
 
 }
