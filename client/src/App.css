@@ -241,12 +241,12 @@ hr {
 .tbl-header{
   background-color: rgba(255,255,255,0.3);
  }
-th_voterDisplay{
+.th_voterDisplay{
 
   margin-left: 1px;
   width: 90%;
 }
-td_voterDisplay{
+.td_voterDisplay{
   width: 50%;
 }
 .imgBorder{
