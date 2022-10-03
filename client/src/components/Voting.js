@@ -42,7 +42,7 @@ function Voting() {
   return (
     <div className="back_color">
       <img className="logoVoting" src={vote_logo}></img>
-     <div>
+     <div className="infor">
         <b>
           {/*<i>{totalCandidates}</i><br/>*/}
         </b>
