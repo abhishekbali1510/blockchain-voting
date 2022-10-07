@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import vote from "../voted.png";
+import vote1 from "../voted.png";
 import vote_logo from "../vote_logo.png";
-import {contract} from "./Connection";
+import {contract,myAccount} from "./Connection";
 import {useEffect} from "react";
 // import { ReactSession } from 'react-client-session';
 
@@ -27,8 +27,18 @@ function Voting() {
   function onChangeValue(event) {
     setVoter(event.target.value);
     console.log(event.target.value);
+    
   }
-
+  function vote()
+  {
+    contract.methods
+      .increaseVote(
+        vot
+      )
+      .send({ from: myAccount, gas: 800000 });
+    console.log("Voted");
+    
+  }
   // console.log(ReactSession.get("userData"));
   // console.log(sessionStorage.getItem("name"));
   useEffect(()=>{
@@ -73,10 +83,11 @@ function Voting() {
             </font>
           </th>
         </tr>
+
         <tr>
           <center>
             <td>
-              <img src={vote} height={100} width={100} alt="P1"></img>
+              <img src={vote1} height={100} width={100} alt="P1"></img>
             </td>
           </center>
           <td className="wid">
@@ -89,10 +100,11 @@ function Voting() {
             ></input>
           </td>
         </tr>
+        
         <tr>
           <center>
             <td>
-              <img src={vote} height={100} width={100} alt="P2"></img>
+              <img src={vote1} height={100} width={100} alt="P2"></img>
             </td>
           </center>
           <td className="wid">
@@ -105,11 +117,12 @@ function Voting() {
             ></input>
           </td>
         </tr>
+
         <tr>
           <center>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <td>
-              <button type="submit" className="button_V">
+              <button type="submit" className="button_V" onClick={vote}>
                 Submit
               </button>
             </td>
