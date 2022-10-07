@@ -241,12 +241,12 @@ hr {
 .tbl-header{
   background-color: rgba(255,255,255,0.3);
  }
-th{
+.th_voterDisplay{
 
   margin-left: 1px;
   width: 90%;
 }
-td{
+.td_voterDisplay{
   width: 50%;
 }
 .imgBorder{
@@ -402,8 +402,8 @@ td{
   .infor{
     width: 180x;
     height: 60px;
-    background-color: #1eb9ac;
-    border: 3px solid #121213;
+    /*background-color: #1eb9ac;
+    border: 3px solid #121213;*/
     margin-left: 85%;
     border-radius: 7px;
   }

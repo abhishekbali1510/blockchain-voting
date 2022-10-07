@@ -73,36 +73,36 @@ function VoterDisplay() {
               <table className="tab" cellPadding="0" cellSpacing="0">
                 <tbody>
                   <tr>
-                    <th>Epic Id</th>
-                    <td>{epicId}</td>
+                    <th className='th_voterDisplay'>Epic Id</th>
+                    <td className='td_voterDisplay'>{epicId}</td>
                   </tr>
                   <tr>
-                    <th>Name</th>
-                    <td>{name}</td>
+                    <th className='th_voterDisplay'>Name</th>
+                    <td className='td_voterDisplay'>{name}</td>
                   </tr>
                   <tr>
-                    <th>Father's Name</th>
-                    <td>{fatherName}</td>
+                    <th className='th_voterDisplay'>Father's Name</th>
+                    <td className='td_voterDisplay'>{fatherName}</td>
                   </tr>
                   <tr>
-                    <th>Email</th>
-                    <td>{email}</td>
+                    <th className='th_voterDisplay'>Email</th>
+                    <td className='td_voterDisplay'>{email}</td>
                   </tr>
                   <tr>
-                    <th>Address</th>
-                    <td>{address} </td>
+                    <th className='th_voterDisplay'>Address</th>
+                    <td className='td_voterDisplay'>{address} </td>
                   </tr>
                   <tr>
-                    <th>DOB</th>
-                    <td>{dob}</td>
+                    <th className='th_voterDisplay'>DOB</th>
+                    <td className='td_voterDisplay'>{dob}</td>
                   </tr>
                   <tr>
-                    <th>Phone number</th>
-                    <td>{phone}</td>
+                    <th className='th_voterDisplay'>Phone number</th>
+                    <td className='td_voterDisplay'>{phone}</td>
                   </tr>
                   <tr>
-                    <th>Gender</th>
-                    <td>{gender}</td>
+                    <th className='th_voterDisplay'>Gender</th>
+                    <td className='td_voterDisplay'>{gender}</td>
                   </tr>
                 </tbody>
               </table>
