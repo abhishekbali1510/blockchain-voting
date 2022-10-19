@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import vote1 from "../voted.png";
 import vote_logo from "../vote_logo.png";
+import vote_logo2 from "../vote_logo2.png";
 import {contract,myAccount} from "./Connection";
 import {useEffect} from "react";
 // import { ReactSession } from 'react-client-session';
@@ -56,9 +57,9 @@ function Voting() {
         <b>
           {/*<i>{totalCandidates}</i><br/>*/}
         </b>
-        <b> NAME: {localStorage.getItem("userSessionData").split(',')[1]}</b>
+        {/*<b> NAME: {localStorage.getItem("userSessionData").split(',')[1]}</b>
         <br />
-        <b>EPIC ID: {localStorage.getItem("userSessionData").split(',')[0]}</b>
+  <b>EPIC ID: {localStorage.getItem("userSessionData").split(',')[0]}</b>*/}
       </div>
       <br />
       <br />
@@ -74,7 +75,7 @@ function Voting() {
         <tr>
           <font face="Bedrock" size="5">
             {" "}
-            <th>PARTY</th>
+            <th>PARTY </th>
           </font>
           <th>
             <font face="Bedrock" size="5">
@@ -84,14 +85,16 @@ function Voting() {
           </th>
         </tr>
 
-        <tr>
+        <tr className="row_spacing">
           <center>
             <td>
               <img src={vote1} height={100} width={100} alt="P1"></img>
+              <b>P1</b>
             </td>
           </center>
           <td className="wid">
             <input
+              className="input_width"
               type="radio"
               value="P1"
               name="vot"
@@ -101,14 +104,16 @@ function Voting() {
           </td>
         </tr>
         
-        <tr>
+        <tr className="row_spacing">
           <center>
             <td>
-              <img src={vote1} height={100} width={100} alt="P2"></img>
+              <img src={vote_logo2} height={100} width={100} alt="P2"></img>
+              <b>P2</b>
             </td>
           </center>
           <td className="wid">
             <input
+              className="input_width"
               type="radio"
               value="P2"
               name="vot"
