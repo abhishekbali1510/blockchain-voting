@@ -35,7 +35,7 @@ function VoterDisplay() {
     <>
       <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
         <div className="wrapper wrapper--w790">
-          <h1 align="center">Voter's Data</h1>
+          <h1 align="center"><b>Voter's Data</b></h1>
           <div>
             <form>
               <div>
@@ -52,11 +52,6 @@ function VoterDisplay() {
               </div>
             </form>
           </div>
-          <br />
-          <button type="button" onClick={fetchData()} className="button1">
-            Success
-          </button>
-          <br />
           <br />
           <div>
             <div>
