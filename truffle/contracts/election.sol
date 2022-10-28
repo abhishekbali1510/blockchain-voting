@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 
-contract election
+contract Election
 {
 
     // voter info structure
@@ -93,6 +93,51 @@ contract election
     function increaseVote(string memory _id) public
     {
         allCandidates[candidateSearch[_id]].totalVotes+=1;
+    }
+
+    // election info structure
+    struct electionInfo
+    {
+        uint id;
+        string electionName;
+        string electionDistrict;
+        string electionDate;
+        string startingTime;
+        string endingTime;
+        uint totalVotes;
+
+    }
+    uint public currentID=0;
+    function incrementCurrentID() public
+    {
+        currentID=currentID+1;
+    }
+
+    electionInfo[] allElections;
+    mapping(uint => uint) public electionSearch ;      // id => index
+
+    function createElection(string memory _electionName,string memory _electionDistrict,string memory _electionDate,string memory _electionStartingTime,string memory _electionEndingTime) public
+    {
+        allElections.push(electionInfo(currentID,_electionName,_electionDistrict,_electionDate,_electionStartingTime,_electionEndingTime,0));
+        electionSearch[currentID]=allElections.length-1;
+        incrementCurrentID();
+    }
+
+    function showElectionInfo(uint _id) view public returns(electionInfo memory)
+    {
+        return allElections[electionSearch[_id]];
+    }
+
+
+
+
+
+    // constructor for first Empty Records
+    constructor() 
+    {
+        registerVoter("","","","","","","","");
+        registerCandidate("","","","","","","","","");
+        createElection("","","","","");
     }
 
 }

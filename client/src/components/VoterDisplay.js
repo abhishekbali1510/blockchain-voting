@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { contract } from "./Connection";
 // import logo1 from "./12345.jpeg";
 function VoterDisplay() {
@@ -14,7 +14,7 @@ function VoterDisplay() {
 
   function fetchData() {
     contract.methods.showVoterInfo(epicId).call((err, data) => {
-      console.log("data : ", data);
+      console.log("data : ", err);
       setname(data.voterName);
       setfatherName(data.voterFatherName);
       setemail(data.voterEmail);
@@ -25,7 +25,9 @@ function VoterDisplay() {
       setimagename("/voterPic/" + epicId + ".jpeg");
     });
   }
-
+   useEffect(() => {
+    fetchData();
+  });
   //    async function fetchData(){
   //     var data=await contract.methods.showVoterInfo(epicId).call();
   //     console.log("data : ",data);
