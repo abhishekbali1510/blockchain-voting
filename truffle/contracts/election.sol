@@ -132,12 +132,6 @@ contract Election
 
 
 
-    // constructor for first Empty Records
-    constructor() 
-    {
-        registerVoter("","","","","","","","");
-        registerCandidate("","","","","","","","","");
-        createElection("","","","","");
-    }
+    
 
 }
