@@ -10,6 +10,7 @@ import CheckVoter from "./components/checkVoter";
 import CheckCandidate from "./components/checkCandidate";
 import VoterLogin from "./components/VoterLogin";
 import Voting from "./components/Voting";
+import ElectionCreation from "./components/ElectionCreation";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
         <Route path="/voterDisplay" element={<VoterDisplay />} />
 
         <Route path="/voting" element={<Voting />} />
+
+        <Route path="/createElection" element={<ElectionCreation />} />
 
         <Route path="/" element={<VoterDisplay />} />
       </Routes>
