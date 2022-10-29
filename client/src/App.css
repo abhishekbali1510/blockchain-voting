@@ -471,3 +471,8 @@ border-spacing: 1em;
   align-items: center;
   margin-top: 6%;
 }
+/*Election creation*/
+.errorColor{
+ color:red;
+ size:7px; 
+}
