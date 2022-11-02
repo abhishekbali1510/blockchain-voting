@@ -2,60 +2,103 @@ import React, { useState } from "react";
 import vote1 from "../voted.png";
 import vote_logo from "../vote_logo.png";
 import vote_logo2 from "../vote_logo2.png";
-import {contract,myAccount} from "./Connection";
-import {useEffect} from "react";
+import { contract, myAccount } from "./Connection";
+import { useEffect } from "react";
 // import { ReactSession } from 'react-client-session';
 
 function Voting() {
   const [vot, setVoter] = useState();
   const [totalCandidates, setTotalCandidates] = useState(0);
-  
-  async function fetchTotalCandidates(){
+  const [allCandidates, setAllCandidates] = useState([]);
+  const [allCandidatesDisplayData, setAllCandidatesDisplayData] = useState([]);
+
+  async function fetchTotalCandidates() {
     setTotalCandidates(await contract.methods.totalCandidates().call());
     console.log(localStorage.getItem("userSessionData"));
   }
-  
-  async function fetchAllCandidates()
-  {
-    
-    for(let i=0;i<await contract.methods.totalCandidates().call();i++)
-    {
-      let data=await contract.methods.fetchCandidateByIndex(i).call();
-      console.log(data.candidateName)
-    }
-    
-  }
+
+
   function onChangeValue(event) {
     setVoter(event.target.value);
     console.log(event.target.value);
-    
+
   }
-  function vote()
-  {
+
+  function showlogcandidates() {
+    console.log(allCandidates);
+  }
+
+  function vote() {
     contract.methods
       .increaseVote(
         vot
       )
       .send({ from: myAccount, gas: 800000 });
     console.log("Voted");
-    
+
   }
   // console.log(ReactSession.get("userData"));
   // console.log(sessionStorage.getItem("name"));
-  useEffect(()=>{
+  function allCandidatesDisplay() {
+    setAllCandidatesDisplayData(allCandidates.filter(function (elem) {
+      return elem.id != "";
+  }).map((elem) => {
+      return (
+        <>
+          <tr className="row_spacing">
+            <center>
+              <td>
+                <img src={vote_logo2} height={100} width={100} alt="P2"></img>
+                <b>{elem.candidateName}</b>
+              </td>
+            </center>
+            <td className="wid">
+              <input
+                className="input_width"
+                type="radio"
+                value={elem.partyName}
+                name="vot"
+                onChange={onChangeValue}
+                checked={vot === elem.partyName}
+              ></input>
+            </td>
+          </tr>
+        </>
+      )
+    }));
+
+  }
+  useEffect(() => {
+    async function fetchAllCandidates() {
+
+      for (let i = 0; i < await contract.methods.totalCandidates().call(); i++) {
+        let localData = await contract.methods.fetchCandidateByIndex(i).call();
+        setAllCandidates((prevState) => [...prevState, localData])
+      }
+    }
+
+
     fetchTotalCandidates();
     fetchAllCandidates();
 
-    
-  },[]);
+  }, []);
+
+  useEffect(() => {
+
+    showlogcandidates();
 
 
+  }, [allCandidates]);
+
+  setTimeout(() => {
+    allCandidatesDisplay();
+  }, showlogcandidates);
   return (
     <div className="back_color">
       <img className="logoVoting" src={vote_logo}></img>
-     <div className="infor">
+      <div className="infor">
         <b>
-          {/*<i>{totalCandidates}</i><br/>*/}
+          <i>{totalCandidates}</i><br />
         </b>
         {/*<b> NAME: {localStorage.getItem("userSessionData").split(',')[1]}</b>
         <br />
@@ -85,7 +128,7 @@ function Voting() {
           </th>
         </tr>
 
-        <tr className="row_spacing">
+        {/* <tr className="row_spacing">
           <center>
             <td>
               <img src={vote1} height={100} width={100} alt="P1"></img>
@@ -102,26 +145,9 @@ function Voting() {
               checked={vot === "P1"}
             ></input>
           </td>
-        </tr>
-        
-        <tr className="row_spacing">
-          <center>
-            <td>
-              <img src={vote_logo2} height={100} width={100} alt="P2"></img>
-              <b>P2</b>
-            </td>
-          </center>
-          <td className="wid">
-            <input
-              className="input_width"
-              type="radio"
-              value="P2"
-              name="vot"
-              onChange={onChangeValue}
-              checked={vot === "P2"}
-            ></input>
-          </td>
-        </tr>
+        </tr> */}
+
+        {allCandidatesDisplayData}
 
         <tr>
           <center>
