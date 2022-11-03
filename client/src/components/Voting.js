@@ -56,10 +56,10 @@ function Voting() {
               <input
                 className="input_width"
                 type="radio"
-                value={elem.partyName}
+                value={elem.id}
                 name="vot"
                 onChange={onChangeValue}
-                checked={vot === elem.partyName}
+                checked={vot === elem.id}
               ></input>
             </td>
           </tr>
