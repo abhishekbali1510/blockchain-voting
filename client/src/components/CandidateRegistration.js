@@ -123,7 +123,7 @@ class CandidateRegistration extends Component {
                             value={this.state.first_name}
                             onChange={this.handleUsernameChange}
                             name="first_name"
-                            required
+                            // required
                           ></input>
                           <label className="label--desc">first name</label>
                         </div>
@@ -153,7 +153,7 @@ class CandidateRegistration extends Component {
                         value={this.state.Uniq_id}
                         onChange={this.handleUniqChange}
                         name="Uniq_id"
-                        required
+                        // required
                       ></input>
                     </div>
                   </div>
@@ -168,7 +168,7 @@ class CandidateRegistration extends Component {
                         value={this.state.email}
                         onChange={this.handleEmailChange}
                         name="email"
-                        required
+                        // required
                       ></input>
                     </div>
                   </div>
@@ -183,7 +183,7 @@ class CandidateRegistration extends Component {
                         value={this.state.district}
                         onChange={this.handleDistrictChange}
                         name="district"
-                        required
+                        // required
                       ></input>
                     </div>
                   </div>
@@ -198,7 +198,7 @@ class CandidateRegistration extends Component {
                         value={this.state.fatherName}
                         onChange={this.handleFnameChange}
                         name="fatherName"
-                        required
+                        // required
                       ></input>
                     </div>
                   </div>
@@ -213,7 +213,7 @@ class CandidateRegistration extends Component {
                         value={this.state.dob}
                         onChange={this.handleDobChange}
                         name="dob"
-                        required
+                        // required
                       ></input>
                     </div>
                   </div>
@@ -242,7 +242,7 @@ class CandidateRegistration extends Component {
                             value={this.state.phone}
                             onChange={this.handlePhoneChange}
                             name="phone"
-                            required
+                            // required
                           ></input>
                           <label className="label--desc">Phone Number</label>
                         </div>
@@ -260,7 +260,7 @@ class CandidateRegistration extends Component {
                             value={this.state.gender}
                             onChange={this.handleGChange}
                             name="gender"
-                            required
+                            // required
                           >
                             Choose option
                           </option>
@@ -282,7 +282,7 @@ class CandidateRegistration extends Component {
                         type="file"
                         onChange={this.handleimageChange}
                         name="image"
-                        required
+                        // required
                       ></input>
                     </div>
                   </div>
@@ -297,7 +297,7 @@ class CandidateRegistration extends Component {
                         value={this.state.partyName}
                         onChange={this.handlePartyNameChange}
                         name="partyName"
-                        required
+                        // required
                       ></input>
                     </div>
                   </div>
@@ -311,7 +311,7 @@ class CandidateRegistration extends Component {
                         type="file"
                         onChange={this.handleSymbolChange}
                         name="symbol"
-                        required
+                        // required
                       ></input>
                     </div>
                   </div>

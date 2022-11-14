@@ -127,10 +127,11 @@ contract election {
         return allCandidates[_index];
     }
 
-    //function checkVoted(string memory _epic) view public returns(bool)
-    //{
-    //  retuallVoters[voterSearch[_epic]].isVoted
-    //}
+    function voterVoted(string memory _epic) public 
+    {
+        allVoters[voterSearch[_epic]].isVoted=true;
+    }
+
     function increaseVote(string memory _id) public {
         allCandidates[candidateSearch[_id]].totalVotes += 1;
     }

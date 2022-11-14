@@ -98,6 +98,7 @@ class VoterRegistration extends Component {
       )
       .send({ from: myAccount, gas: 800000 });
     console.log("data sent");
+    alert("Voter Registered !!");
   };
 
   render() {

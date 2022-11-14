@@ -88,23 +88,23 @@ function VoterLogin() {
         console.log("Date matched");
         if (currentHour > localElectionStartingHour && currentHour < localElectionEndingHour) {
           console.log("case 1");
-          // localStorage.setItem("userSessionData", userData);
-          // navigate("/voting");
+          localStorage.setItem("userSessionData", userData);
+          navigate("/voting");
         }
         else if (currentHour == localElectionStartingHour && currentMinute > localElectionStartingMinutes && currentHour < localElectionEndingHour) {
           console.log("case 2");
-          // localStorage.setItem("userSessionData", userData);
-          // navigate("/voting");
+          localStorage.setItem("userSessionData", userData);
+          navigate("/voting");
         }
         else if (currentHour > localElectionStartingHour && currentHour == localElectionEndingHour && currentMinute < localElectionEndingMinutes) {
           console.log("case 3");
-          // localStorage.setItem("userSessionData", userData);
-          // navigate("/voting");
+          localStorage.setItem("userSessionData", userData);
+          navigate("/voting");
         }
         else if (currentHour == localElectionStartingHour && currentMinute > localElectionStartingMinutes && currentHour == localElectionEndingHour && currentMinute < localElectionEndingMinutes) {
           console.log("case 4");
-          // localStorage.setItem("userSessionData", userData);
-          // navigate("/voting");
+          localStorage.setItem("userSessionData", userData);
+          navigate("/voting");
         }
         else {
           navigate("/noVoting");

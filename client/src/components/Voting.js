@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-// import vote1 from "../voted.png";
 import vote_logo from "../vote_logo.png";
 import vote_logo2 from "../vote_logo2.png";
 import { contract, myAccount } from "./Connection";
 import { useEffect } from "react";
-// import { ReactSession } from 'react-client-session';
 
 function Voting() {
   const [vot, setVoter] = useState();
@@ -34,6 +32,10 @@ function Voting() {
         vot
       )
       .send({ from: myAccount, gas: 800000 });
+
+    contract.methods
+      .voterVoted(localStorage.getItem("userSessionData").split(",")[0])
+      .send({ from: myAccount, gas: 800000 });
     console.log("Voted");
 
   }
@@ -42,7 +44,7 @@ function Voting() {
   function allCandidatesDisplay() {
     setAllCandidatesDisplayData(allCandidates.filter(function (elem) {
       return elem.id != "";
-  }).map((elem) => {
+    }).map((elem) => {
       return (
         <>
           <tr className="row_spacing">
@@ -73,8 +75,9 @@ function Voting() {
 
       for (let i = 0; i < await contract.methods.totalCandidates().call(); i++) {
         let localData = await contract.methods.fetchCandidateByIndex(i).call();
-        // if localData.district === user district 
-        setAllCandidates((prevState) => [...prevState, localData])
+        // if localData.district === user district
+        if (localData.candidateDistrict == localStorage.getItem("userSessionData").split(",")[6])
+          setAllCandidates((prevState) => [...prevState, localData]);
       }
     }
 
