@@ -58,21 +58,21 @@ function VoterLogin() {
       let localElectionYear = localElectionDetails.electionDate.slice(0, 4);
       let localElectionStartingHour = localElectionDetails.startingTime.slice(0, 2);
       let localElectionStartingMinutes = localElectionDetails.startingTime.slice(3, 5);
-      let localElectionStartingSeconds = localElectionDetails.startingTime.slice(6, 8);
-      let localElectionEndingHour = localElectionDetails.startingTime.slice(0, 2);
-      let localElectionEndingSeconds = localElectionDetails.startingTime.slice(6, 8);
-      let localElectionEndingMinutes = localElectionDetails.startingTime.slice(3, 5);
+      // let localElectionStartingSeconds = localElectionDetails.startingTime.slice(6, 8);
+      let localElectionEndingHour = localElectionDetails.endingTime.slice(0, 2);
+      // let localElectionEndingSeconds = localElectionDetails.startingTime.slice(6, 8);
+      let localElectionEndingMinutes = localElectionDetails.endingTime.slice(3, 5);
       let currentDate = new Date().getDate();
       let currentMonth = new Date().getMonth() + 1;
       let currentYear = new Date().getFullYear();
       let currentHour = new Date().getHours();
       let currentMinute = new Date().getMinutes();
-      let currentSecond = new Date().getSeconds();
+      // let currentSecond = new Date().getSeconds();
       // console.log(currentDate);
       // console.log(currentMonth);
       // console.log(currentYear);
       // console.log(currentHour);
-      // console.log(currentMinutes);
+      // console.log(currentMinute);
       // console.log(currentSeconds);
       // console.log(localElectionDetails.startingTime);
       // console.log(localElectionDate);
@@ -80,15 +80,35 @@ function VoterLogin() {
       // console.log(localElectionYear);
       // console.log(localElectionStartingHour);
       // console.log(localElectionStartingMinutes);
+      // console.log(localElectionEndingHour);
+      // console.log(localElectionEndingMinutes);
       // console.log(localElectionStartingSeconds);
       // console.log(localElectionStartingTime);
       if (localElectionDate == currentDate && localElectionMonth == currentMonth && localElectionYear == currentYear) {
         console.log("Date matched");
-        // if(currentHour>=localElectionStartingHour&&currentHour<=localElectionEndingHour)
-        
-        // localStorage.setItem("userSessionData", userData);
-        // navigate("/voting");
-
+        if (currentHour > localElectionStartingHour && currentHour < localElectionEndingHour) {
+          console.log("case 1");
+          // localStorage.setItem("userSessionData", userData);
+          // navigate("/voting");
+        }
+        else if (currentHour == localElectionStartingHour && currentMinute > localElectionStartingMinutes && currentHour < localElectionEndingHour) {
+          console.log("case 2");
+          // localStorage.setItem("userSessionData", userData);
+          // navigate("/voting");
+        }
+        else if (currentHour > localElectionStartingHour && currentHour == localElectionEndingHour && currentMinute < localElectionEndingMinutes) {
+          console.log("case 3");
+          // localStorage.setItem("userSessionData", userData);
+          // navigate("/voting");
+        }
+        else if (currentHour == localElectionStartingHour && currentMinute > localElectionStartingMinutes && currentHour == localElectionEndingHour && currentMinute < localElectionEndingMinutes) {
+          console.log("case 4");
+          // localStorage.setItem("userSessionData", userData);
+          // navigate("/voting");
+        }
+        else {
+          navigate("/noVoting");
+        }
       }
       else {
         console.log("Date not matched")

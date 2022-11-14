@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import vote1 from "../voted.png";
+// import vote1 from "../voted.png";
 import vote_logo from "../vote_logo.png";
 import vote_logo2 from "../vote_logo2.png";
 import { contract, myAccount } from "./Connection";
@@ -73,6 +73,7 @@ function Voting() {
 
       for (let i = 0; i < await contract.methods.totalCandidates().call(); i++) {
         let localData = await contract.methods.fetchCandidateByIndex(i).call();
+        // if localData.district === user district 
         setAllCandidates((prevState) => [...prevState, localData])
       }
     }
