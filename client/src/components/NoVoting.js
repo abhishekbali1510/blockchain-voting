@@ -1,6 +1,6 @@
 import React from "react";
-import vote from "./novote.png";
 function NoVoting() {
+  let novoteimg="/Images/novote.png";
   return (
     <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
       <div className="wrapper wrapper--w790">
@@ -12,7 +12,7 @@ function NoVoting() {
           <br />
           <br />
           <center>
-            <img src={vote} height={300} width={400}></img>
+            <img src={novoteimg} height={300} width={400}></img>
           </center>
           <h1 align="center">
             <i>NO VOTING RIGHT NOW!</i>

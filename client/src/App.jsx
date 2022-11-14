@@ -2,7 +2,6 @@ import "./App.css";
 import VoterRegistration from "./components/VoterRegistration";
 import CandidateRegistration from "./components/CandidateRegistration.js";
 import VoterDisplay from "./components/VoterDisplay";
-//import CandidateRegistration from "./components/CandidateRegistration";
 import { Route, Routes } from "react-router-dom";
 import { Connection } from "./components/Connection";
 import FileUpload from "./components/FileUpload";
@@ -11,6 +10,8 @@ import CheckCandidate from "./components/checkCandidate";
 import VoterLogin from "./components/VoterLogin";
 import Voting from "./components/Voting";
 import ElectionCreation from "./components/ElectionCreation";
+import VoteCounted from "./components/VoteCounted";
+import NoVoting from "./components/NoVoting";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
 
         <Route path="/checkCandidate" element={<CheckCandidate />} />
 
-        <Route path="/login" element={<VoterLogin />} />
+        <Route path="/" element={<VoterLogin />} />
 
         <Route path="/candidateRegister" element={<CandidateRegistration />} />
 
@@ -35,7 +36,11 @@ function App() {
 
         <Route path="/createElection" element={<ElectionCreation />} />
 
-        <Route path="/" element={<VoterDisplay />} />
+        <Route path="/votingDisplay" element={<VoterDisplay />} />
+
+        <Route path="/voteCounted" element={<VoteCounted />} />
+
+        <Route path="/noVoting" element={<NoVoting />} />
       </Routes>
     </>
   );

@@ -12,7 +12,7 @@ class VoterRegistration extends Component {
       father_last_name: "",
       Epic_id: "",
       email: "",
-      address: "",
+      district: "",
       dob: "",
       area_code: "",
       phone: "",
@@ -39,7 +39,7 @@ class VoterRegistration extends Component {
     this.setState({ email: event.target.value });
   };
   handleAddressChange = (event) => {
-    this.setState({ address: event.target.value });
+    this.setState({ district: event.target.value });
   };
   handleDobChange = (event) => {
     this.setState({ dob: event.target.value });
@@ -93,7 +93,7 @@ class VoterRegistration extends Component {
         this.state.email,
         mobile,
         this.state.dob,
-        this.state.address,
+        this.state.district,
         this.state.gender
       )
       .send({ from: myAccount, gas: 800000 });
@@ -202,15 +202,15 @@ class VoterRegistration extends Component {
                     </div>
                   </div>
                   <div className="form-row">
-                    <div className="name">Address</div>
+                    <div className="name">District</div>
                     <div className="value">
                       <div className="input-group">
                         <input
                           className="input--style-5 input-meenal"
-                          type="address"
-                          value={this.state.address}
+                          type="text"
+                          value={this.state.district}
                           onChange={this.handleAddressChange}
-                          name="address"
+                          name="district"
                         ></input>
                       </div>
                     </div>

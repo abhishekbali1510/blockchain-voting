@@ -10,7 +10,7 @@ class CandidateRegistration extends Component {
       last_name: "",
       Uniq_id: "",
       email: "",
-      address: "",
+      district: "",
       fatherName: "",
       dob: "",
       partyName: "",
@@ -33,8 +33,8 @@ class CandidateRegistration extends Component {
   handleEmailChange = (event) => {
     this.setState({ email: event.target.value });
   };
-  handleAddressChange = (event) => {
-    this.setState({ address: event.target.value });
+  handleDistrictChange = (event) => {
+    this.setState({ district: event.target.value });
   };
   handleFnameChange = (event) => {
     this.setState({ fatherName: event.target.value });
@@ -93,7 +93,7 @@ class CandidateRegistration extends Component {
         this.state.email,
         this.state.fatherName,
         this.state.phone,
-        this.state.address,
+        this.state.district,
         this.state.dob,
         this.state.gender
       )
@@ -174,15 +174,15 @@ class CandidateRegistration extends Component {
                   </div>
                 </div>
                 <div className="form-row">
-                  <div className="name">Address</div>
+                  <div className="name">district</div>
                   <div className="value">
                     <div className="input-group">
                       <input
                         className="input--style-5"
-                        type="address"
-                        value={this.state.address}
-                        onChange={this.handleAddressChange}
-                        name="address"
+                        type="text"
+                        value={this.state.district}
+                        onChange={this.handleDistrictChange}
+                        name="district"
                         required
                       ></input>
                     </div>

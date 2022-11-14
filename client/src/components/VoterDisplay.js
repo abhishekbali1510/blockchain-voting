@@ -6,7 +6,7 @@ function VoterDisplay() {
   var [name, setname] = useState("");
   var [fatherName, setfatherName] = useState("");
   var [email, setemail] = useState("");
-  var [address, setaddress] = useState("");
+  var [district, setdistrict] = useState("");
   var [dob, setdob] = useState("");
   var [phone, setphone] = useState("");
   var [gender, setgender] = useState("");
@@ -20,7 +20,7 @@ function VoterDisplay() {
       setemail(data.voterEmail);
       setphone(data.voterMobile);
       setgender(data.voterGender);
-      setaddress(data.voterAddress);
+      setdistrict(data.voterDistrict);
       setdob(data.voterDOB);
       setimagename("/voterPic/" + epicId + ".jpeg");
     });
@@ -86,8 +86,8 @@ function VoterDisplay() {
                     <td className='td_voterDisplay'>{email}</td>
                   </tr>
                   <tr>
-                    <th className='th_voterDisplay'>Address</th>
-                    <td className='td_voterDisplay'>{address} </td>
+                    <th className='th_voterDisplay'>District</th>
+                    <td className='td_voterDisplay'>{district} </td>
                   </tr>
                   <tr>
                     <th className='th_voterDisplay'>DOB</th>

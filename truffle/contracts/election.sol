@@ -10,7 +10,7 @@ contract election {
         string voterEmail;
         string voterMobile;
         string voterDOB;
-        string voterAddress;
+        string voterDistrict;
         string voterGender;
         bool isVoted;
     }
@@ -26,7 +26,7 @@ contract election {
         string memory _voterEmail,
         string memory _voterMobile,
         string memory _voterDOB,
-        string memory _voterAddress,
+        string memory _voterDistrict,
         string memory _voterGender
     ) public {
         allVoters.push(
@@ -37,7 +37,7 @@ contract election {
                 _voterEmail,
                 _voterMobile,
                 _voterDOB,
-                _voterAddress,
+                _voterDistrict,
                 _voterGender,
                 false
             )
@@ -67,7 +67,7 @@ contract election {
         string candidateEmail;
         string candidateFatherName;
         string candidateMobile;
-        string candidateAddress;
+        string candidateDistrict;
         string candidateDOB;
         string candidateGender;
         uint256 totalVotes;
@@ -84,7 +84,7 @@ contract election {
         string memory __candidateEmail,
         string memory _candidateFatherName,
         string memory _candidateMobile,
-        string memory _candidateAddress,
+        string memory _candidateDistrict,
         string memory _candidateDOB,
         string memory _candidateGender
     ) public {
@@ -96,7 +96,7 @@ contract election {
                 __candidateEmail,
                 _candidateFatherName,
                 _candidateMobile,
-                _candidateAddress,
+                _candidateDistrict,
                 _candidateDOB,
                 _candidateGender,
                 0
@@ -153,6 +153,7 @@ contract election {
 
     electionInfo[] allElections;
     mapping(uint256 => uint256) public electionSearch; // id => index
+    mapping(string => uint256) public electionSearchDistrict; // district => index
 
     function createElection(
         string memory _electionName,
@@ -173,6 +174,7 @@ contract election {
             )
         );
         electionSearch[currentID] = allElections.length - 1;
+        electionSearchDistrict[_electionDistrict] = allElections.length - 1;
         incrementCurrentID();
     }
 
@@ -182,6 +184,14 @@ contract election {
         returns (electionInfo memory)
     {
         return allElections[electionSearch[_id]];
+    }
+
+    function showElectionInfoByDistrict(string memory _district)
+        public
+        view
+        returns (electionInfo memory)
+    {
+        return allElections[electionSearchDistrict[_district]];
     }
 
     constructor() {

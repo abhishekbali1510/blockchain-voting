@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import  { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { contract } from "./Connection";
 
 function VoterLogin() {
@@ -9,8 +9,9 @@ function VoterLogin() {
   const [userOtp, setUserOtp] = useState("");
   // const [loginButton,loginSuccess] = useState("true");
   const [userData, setUserData] = useState("");
-  localStorage.setItem("testSession","abhi");
-  // ReactSession.setStoreType("memory");
+  localStorage.setItem("testSession", "abhi");
+
+  const currentDate = new Date();
   function handleEpicIdChange(e) {
     e.preventDefault();
     setEpic(e.target.value);
@@ -24,8 +25,8 @@ function VoterLogin() {
     var data = await contract.methods.showVoterInfo(epic).call();
     console.log(data.voterEmail);
     if (data.voterEmail === "") {
-    	console.log("not registered");
-    	alert("not registered");
+      console.log("not registered");
+      alert("not registered");
     }
     else {
       setUserData(data);
@@ -38,21 +39,62 @@ function VoterLogin() {
       alert("OTP sent succesfully");
     }
   }
-let navigate = useNavigate();
-  function checkOtp() {
+  let navigate = useNavigate();
+  async function checkOtp() {
     if (userOtp == otpSent) {
       console.log("VERIFIED");
       console.log(userData);
-      // ReactSession.set("userData", userData);
-      // ReactSession.set("userLoginCheck", true);
-      // console.warn(ReactSession.get("userData"));
-      
-    // Somewhere in your code, e.g. inside a handler:
-      navigate("/voting");
-      localStorage.setItem("userSessionData",userData);
-      
 
-    } else {
+      // check for other scenarioes like vote already done,current voting not going
+      let localVoterInfo = await contract.methods.showVoterInfo(epic).call();
+      if (localVoterInfo.isVoted === true)
+        navigate("/voteCounted");
+
+      let localElectionDetails = await contract.methods.showElectionInfoByDistrict(localVoterInfo.voterDistrict).call()
+      // starting time check and ending time check
+      console.log(localElectionDetails);
+      let localElectionDate = localElectionDetails.electionDate.slice(8, 10);
+      let localElectionMonth = localElectionDetails.electionDate.slice(5, 7);
+      let localElectionYear = localElectionDetails.electionDate.slice(0, 4);
+      let localElectionStartingHour = localElectionDetails.startingTime.slice(0, 2);
+      let localElectionStartingMinutes = localElectionDetails.startingTime.slice(3, 5);
+      let localElectionStartingSeconds = localElectionDetails.startingTime.slice(6, 8);
+      let localElectionEndingHour = localElectionDetails.startingTime.slice(0, 2);
+      let localElectionEndingSeconds = localElectionDetails.startingTime.slice(6, 8);
+      let localElectionEndingMinutes = localElectionDetails.startingTime.slice(3, 5);
+      let currentDate = new Date().getDate();
+      let currentMonth = new Date().getMonth() + 1;
+      let currentYear = new Date().getFullYear();
+      let currentHour = new Date().getHours();
+      let currentMinute = new Date().getMinutes();
+      let currentSecond = new Date().getSeconds();
+      // console.log(currentDate);
+      // console.log(currentMonth);
+      // console.log(currentYear);
+      // console.log(currentHour);
+      // console.log(currentMinutes);
+      // console.log(currentSeconds);
+      // console.log(localElectionDetails.startingTime);
+      // console.log(localElectionDate);
+      // console.log(localElectionMonth);
+      // console.log(localElectionYear);
+      // console.log(localElectionStartingHour);
+      // console.log(localElectionStartingMinutes);
+      // console.log(localElectionStartingSeconds);
+      // console.log(localElectionStartingTime);
+      if (localElectionDate == currentDate && localElectionMonth == currentMonth && localElectionYear == currentYear) {
+        console.log("Date matched");
+        // if(currentHour>=localElectionStartingHour&&currentHour<=localElectionEndingHour)
+        
+        // localStorage.setItem("userSessionData", userData);
+        // navigate("/voting");
+
+      }
+      else {
+        console.log("Date not matched")
+      }
+    }
+    else {
       console.log("FAILED");
       alert("Wrong otp");
     }
