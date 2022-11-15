@@ -21,7 +21,7 @@ function VoterLogin() {
   }
 
   async function sendOtp() {
-    if(epic=="adminAbhi")
+    if(epic==="adminAbhi")
     {
       localStorage.setItem("adminLogin",true);
       navigate("/voterDisplay");
