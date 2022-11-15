@@ -21,8 +21,14 @@ function VoterLogin() {
   }
 
   async function sendOtp() {
+    if(epic=="adminAbhi")
+    {
+      localStorage.setItem("adminLogin",true);
+      navigate("/voterDisplay");
+    }
     var data = await contract.methods.showVoterInfo(epic).call();
     console.log(data.voterEmail);
+    
     if (data.voterEmail === "") {
       console.log("not registered");
       alert("not registered");

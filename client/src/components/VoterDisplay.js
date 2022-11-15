@@ -31,9 +31,9 @@ function VoterDisplay() {
    useEffect(() => {
     
     // console.log(localStorage.getItem("adminLogin"));
-    // if (localStorage.getItem("adminLogin") !== true) {
-    //   navigate("/");
-    // }
+    if (localStorage.getItem("adminLogin") !== "true") {
+      navigate("/");
+    }
     fetchData();
   });
   //    async function fetchData(){
