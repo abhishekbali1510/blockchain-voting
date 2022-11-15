@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { contract } from "./Connection";
-// import logo1 from "./12345.jpeg";
+import {useNavigate} from "react-router-dom";
+
 function VoterDisplay() {
   var [epicId, setepicId] = useState("");
   var [name, setname] = useState("");
@@ -12,6 +13,8 @@ function VoterDisplay() {
   var [gender, setgender] = useState("");
   var [imgname, setimagename] = useState("");
 
+  let navigate = useNavigate();
+  
   function fetchData() {
     contract.methods.showVoterInfo(epicId).call((err, data) => {
       console.log("data : ", err);
@@ -26,6 +29,11 @@ function VoterDisplay() {
     });
   }
    useEffect(() => {
+    
+    // console.log(localStorage.getItem("adminLogin"));
+    // if (localStorage.getItem("adminLogin") !== true) {
+    //   navigate("/");
+    // }
     fetchData();
   });
   //    async function fetchData(){
@@ -60,6 +68,7 @@ function VoterDisplay() {
               <center>
                 <img
                   src={imgname}
+                  alt="voter pic"
                   height={200}
                   width={200}
                   className="imgBorder"

@@ -12,7 +12,7 @@ function VoteCounted() {
           <br />
           <br />
           <center>
-            <img src={voteCountedImg} height={300} width={400}></img>
+            <img src={voteCountedImg} alt="vote counted" height={300} width={400}></img>
           </center>
           <h1 align="center">
             <i>YOU HAVE VOTED SUCCESSFULLY!</i>

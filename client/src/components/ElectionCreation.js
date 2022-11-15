@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { contract, myAccount } from "./Connection";
 
 function ElectionCreation() {
@@ -6,6 +7,7 @@ function ElectionCreation() {
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         //console.log(e.target);
@@ -17,7 +19,7 @@ function ElectionCreation() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setFormErrors(validate(formValues));
-        
+
 
         // send data to blockchain
         contract.methods
@@ -28,9 +30,9 @@ function ElectionCreation() {
                 formValues.start_time,
                 formValues.end_time
             ).send({ from: myAccount, gas: 800000 });
-            console.log("Election Created");
+        console.log("Election Created");
 
-           setIsSubmit(true); 
+        setIsSubmit(true);
     };
     useEffect(() => {
         console.log(formErrors);
@@ -57,6 +59,10 @@ function ElectionCreation() {
         }
         return errors;
     };
+    useEffect(() => {
+        if (localStorage.getItem("adminLogin") !== true)
+            navigate("/");
+    }, []);
     return (<>
         {/* <div className="container">
       {Object.keys(formErrors).length === 0 && isSubmit ? 

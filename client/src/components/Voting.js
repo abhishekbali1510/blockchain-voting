@@ -3,12 +3,14 @@ import vote_logo from "../vote_logo.png";
 import vote_logo2 from "../vote_logo2.png";
 import { contract, myAccount } from "./Connection";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Voting() {
   const [vot, setVoter] = useState();
   const [totalCandidates, setTotalCandidates] = useState(0);
   const [allCandidates, setAllCandidates] = useState([]);
   const [allCandidatesDisplayData, setAllCandidatesDisplayData] = useState([]);
+  const navigate = useNavigate();
 
   async function fetchTotalCandidates() {
     setTotalCandidates(await contract.methods.totalCandidates().call());
@@ -43,6 +45,7 @@ function Voting() {
   // console.log(sessionStorage.getItem("name"));
   function allCandidatesDisplay() {
     setAllCandidatesDisplayData(allCandidates.filter(function (elem) {
+      // eslint-disable-next-line
       return elem.id != "";
     }).map((elem) => {
       return (
@@ -71,11 +74,14 @@ function Voting() {
 
   }
   useEffect(() => {
+    if (localStorage.getItem("userLogin") !== true)
+      navigate("/");
     async function fetchAllCandidates() {
 
       for (let i = 0; i < await contract.methods.totalCandidates().call(); i++) {
         let localData = await contract.methods.fetchCandidateByIndex(i).call();
         // if localData.district === user district
+        // eslint-disable-next-line
         if (localData.candidateDistrict == localStorage.getItem("userSessionData").split(",")[6])
           setAllCandidates((prevState) => [...prevState, localData]);
       }
@@ -84,14 +90,14 @@ function Voting() {
 
     fetchTotalCandidates();
     fetchAllCandidates();
-
+// eslint-disable-next-line
   }, []);
 
   useEffect(() => {
 
     showlogcandidates();
 
-
+// eslint-disable-next-line
   }, [allCandidates]);
 
   setTimeout(() => {
@@ -99,7 +105,7 @@ function Voting() {
   }, showlogcandidates);
   return (
     <div className="back_color">
-      <img className="logoVoting" src={vote_logo}></img>
+      <img className="logoVoting" alt="voting logo" src={vote_logo}></img>
       <div className="infor">
         <b>
           <i>{totalCandidates}</i><br />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { contract } from "./Connection";
@@ -9,9 +9,8 @@ function VoterLogin() {
   const [userOtp, setUserOtp] = useState("");
   // const [loginButton,loginSuccess] = useState("true");
   const [userData, setUserData] = useState("");
-  localStorage.setItem("testSession", "abhi");
+  // localStorage.setItem("testSession", "abhi");
 
-  const currentDate = new Date();
   function handleEpicIdChange(e) {
     e.preventDefault();
     setEpic(e.target.value);
@@ -41,6 +40,7 @@ function VoterLogin() {
   }
   let navigate = useNavigate();
   async function checkOtp() {
+    // eslint-disable-next-line
     if (userOtp == otpSent) {
       console.log("VERIFIED");
       console.log(userData);
@@ -84,6 +84,7 @@ function VoterLogin() {
       // console.log(localElectionEndingMinutes);
       // console.log(localElectionStartingSeconds);
       // console.log(localElectionStartingTime);
+      // eslint-disable-next-line
       if (localElectionDate == currentDate && localElectionMonth == currentMonth && localElectionYear == currentYear) {
         console.log("Date matched");
         if (currentHour > localElectionStartingHour && currentHour < localElectionEndingHour) {
@@ -91,16 +92,19 @@ function VoterLogin() {
           localStorage.setItem("userSessionData", userData);
           navigate("/voting");
         }
+        // eslint-disable-next-line
         else if (currentHour == localElectionStartingHour && currentMinute > localElectionStartingMinutes && currentHour < localElectionEndingHour) {
           console.log("case 2");
           localStorage.setItem("userSessionData", userData);
           navigate("/voting");
         }
+        // eslint-disable-next-line
         else if (currentHour > localElectionStartingHour && currentHour == localElectionEndingHour && currentMinute < localElectionEndingMinutes) {
           console.log("case 3");
           localStorage.setItem("userSessionData", userData);
           navigate("/voting");
         }
+        // eslint-disable-next-line
         else if (currentHour == localElectionStartingHour && currentMinute > localElectionStartingMinutes && currentHour == localElectionEndingHour && currentMinute < localElectionEndingMinutes) {
           console.log("case 4");
           localStorage.setItem("userSessionData", userData);
@@ -119,6 +123,9 @@ function VoterLogin() {
       alert("Wrong otp");
     }
   }
+  useEffect(()=>{
+    localStorage.clear();
+  },[]);
   return (
     <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
       <div className="limiter">

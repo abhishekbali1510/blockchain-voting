@@ -11,8 +11,8 @@ function NoVoting() {
           <br />
           <br />
           <br />
-          <center>
-            <img src={novoteimg} height={300} width={400}></img>
+          <center> 
+            <img src={novoteimg} alt="no voting" height={300} width={400}></img>
           </center>
           <h1 align="center">
             <i>NO VOTING RIGHT NOW!</i>

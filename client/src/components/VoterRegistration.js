@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { contract, myAccount } from "./Connection";
 import axios from "axios";
+// import { useNavigate } from "react-router-dom";
 
 class VoterRegistration extends Component {
   constructor(props) {
@@ -19,7 +20,12 @@ class VoterRegistration extends Component {
       gender: "male",
       selectedFile: null,
     };
+    // let navigate = useNavigate();
+    // if (localStorage.getItem("adminLogin") !== true) {
+    //   navigate("/");
+    // }
   }
+
   handleFirstNameChange = (event) => {
     this.setState({ first_name: event.target.value });
   };
