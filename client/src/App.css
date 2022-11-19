@@ -476,3 +476,17 @@ border-spacing: 1em;
  color:red;
  size:7px; 
 }
+
+/*RESULT*/
+.h1Class{
+  font-size: 36px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.widthClass{
+  width: 100%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 22px;
+}
+.tdPadding{
+  padding:10px;
+}
