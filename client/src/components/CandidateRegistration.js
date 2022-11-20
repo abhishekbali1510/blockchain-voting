@@ -117,7 +117,7 @@ class CandidateRegistration extends Component {
                   <div className="value">
                     <div className="row row-space">
                       <div className="col-2">
-                        <div className="input-group-desc">
+                        <div className="input-group-desc input-meenal">
                           <input
                             className="input--style-5"
                             type="text"
@@ -132,7 +132,7 @@ class CandidateRegistration extends Component {
                       <div className="col-2">
                         <div className="input-group-desc">
                           <input
-                            className="input--style-5"
+                            className="input--style-5 input-meenal"
                             type="text"
                             value={this.state.last_name}
                             onChange={this.handleNameChange}
@@ -149,7 +149,7 @@ class CandidateRegistration extends Component {
                   <div className="value">
                     <div className="input-group">
                       <input
-                        className="input--style-5"
+                        className="input--style-5 input-meenal"
                         type="text"
                         value={this.state.Uniq_id}
                         onChange={this.handleUniqChange}
@@ -164,7 +164,7 @@ class CandidateRegistration extends Component {
                   <div className="value">
                     <div className="input-group">
                       <input
-                        className="input--style-5"
+                        className="input--style-5 input-meenal"
                         type="email"
                         value={this.state.email}
                         onChange={this.handleEmailChange}
@@ -179,7 +179,7 @@ class CandidateRegistration extends Component {
                   <div className="value">
                     <div className="input-group">
                       <input
-                        className="input--style-5"
+                        className="input--style-5 input-meenal"
                         type="text"
                         value={this.state.district}
                         onChange={this.handleDistrictChange}
@@ -194,7 +194,7 @@ class CandidateRegistration extends Component {
                   <div className="value">
                     <div className="input-group">
                       <input
-                        className="input--style-5"
+                        className="input--style-5 input-meenal"
                         type="text"
                         value={this.state.fatherName}
                         onChange={this.handleFnameChange}
@@ -209,7 +209,7 @@ class CandidateRegistration extends Component {
                   <div className="value">
                     <div className="input-group">
                       <input
-                        className="input--style-5"
+                        className="input--style-5 input-meenal"
                         type="date"
                         value={this.state.dob}
                         onChange={this.handleDobChange}
@@ -226,7 +226,7 @@ class CandidateRegistration extends Component {
                       <div className="col-3">
                         <div className="input-group-desc">
                           <input
-                            className="input--style-5"
+                            className="input--style-5 input-meenal"
                             type="text"
                             value={this.state.area_code}
                             onChange={this.handleAreaChange}
@@ -238,7 +238,7 @@ class CandidateRegistration extends Component {
                       <div className="col-9">
                         <div className="input-group-desc">
                           <input
-                            className="input--style-5"
+                            className="input--style-5 input-meenal"
                             type="text"
                             value={this.state.phone}
                             onChange={this.handlePhoneChange}
@@ -279,7 +279,7 @@ class CandidateRegistration extends Component {
                   <div className="value">
                     <div className="input-group">
                       <input
-                        className="input--style-5"
+                        className="input--style-5 input-meenal"
                         type="file"
                         onChange={this.handleimageChange}
                         name="image"
@@ -293,7 +293,7 @@ class CandidateRegistration extends Component {
                   <div className="value">
                     <div className="input-group">
                       <input
-                        className="input--style-5"
+                        className="input--style-5 input-meenal"
                         type="text"
                         value={this.state.partyName}
                         onChange={this.handlePartyNameChange}
@@ -308,7 +308,7 @@ class CandidateRegistration extends Component {
                   <div className="value">
                     <div className="input-group">
                       <input
-                        className="input--style-5"
+                        className="input--style-5 input-meenal"
                         type="file"
                         onChange={this.handleSymbolChange}
                         name="symbol"
