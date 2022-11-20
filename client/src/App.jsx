@@ -12,6 +12,7 @@ import Voting from "./components/Voting";
 import ElectionCreation from "./components/ElectionCreation";
 import VoteCounted from "./components/VoteCounted";
 import NoVoting from "./components/NoVoting";
+import Result from "./components/Result";
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
         <Route path="/voteCounted" element={<VoteCounted />} />
 
         <Route path="/noVoting" element={<NoVoting />} />
+
+        <Route path="/result/:electionDistrict" element={<Result />} />
       </Routes>
     </>
   );

@@ -21,6 +21,7 @@ function Voting() {
   function onChangeValue(event) {
     setVoter(event.target.value);
     console.log(event.target.value);
+    // console.log(vot);
 
   }
 
@@ -39,6 +40,7 @@ function Voting() {
       .voterVoted(localStorage.getItem("userSessionData").split(",")[0])
       .send({ from: myAccount, gas: 800000 });
     console.log("Voted");
+    navigate("/voteCounted");
 
   }
   // console.log(ReactSession.get("userData"));
@@ -74,8 +76,11 @@ function Voting() {
 
   }
   useEffect(() => {
-    if (localStorage.getItem("userLogin") !== true)
+    if (localStorage.getItem("userLogin") !== "true")
       navigate("/");
+    // eslint-disable-next-line
+    if (localStorage.getItem("userSessionData").split(",")[8] == "true")
+      navigate("/voteCounted");
     async function fetchAllCandidates() {
 
       for (let i = 0; i < await contract.methods.totalCandidates().call(); i++) {
@@ -90,19 +95,19 @@ function Voting() {
 
     fetchTotalCandidates();
     fetchAllCandidates();
-// eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-
+    allCandidatesDisplay();
     showlogcandidates();
 
-// eslint-disable-next-line
-  }, [allCandidates]);
+    // eslint-disable-next-line
+  }, [allCandidates,vot]);
 
-  setTimeout(() => {
-    allCandidatesDisplay();
-  }, showlogcandidates);
+  // setTimeout(() => {
+
+  // }, showlogcandidates);
   return (
     <div className="back_color">
       <img className="logoVoting" alt="voting logo" src={vote_logo}></img>

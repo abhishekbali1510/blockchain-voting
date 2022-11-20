@@ -1,6 +1,7 @@
 import React from "react";
 function VoteCounted() {
   let voteCountedImg="/Images/voted.png";
+  localStorage.clear();
   return (
     <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
       <div className="wrapper wrapper--w790">

@@ -17,7 +17,7 @@ function VoterDisplay() {
   
   function fetchData() {
     contract.methods.showVoterInfo(epicId).call((err, data) => {
-      console.log("data : ", err);
+      console.log("data : ", data);
       setname(data.voterName);
       setfatherName(data.voterFatherName);
       setemail(data.voterEmail);
@@ -27,6 +27,14 @@ function VoterDisplay() {
       setdob(data.voterDOB);
       setimagename("/voterPic/" + epicId + ".jpeg");
     });
+  }
+
+  const handleChange = async (event) => {
+    setepicId(event.target.value);
+  };
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    
   }
    useEffect(() => {
     
@@ -47,7 +55,7 @@ function VoterDisplay() {
         <div className="wrapper wrapper--w790">
           <h1 align="center"><b>Voter's Data</b></h1>
           <div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div>
                 <h3>
                   <b>EPIC ID:</b>
@@ -56,7 +64,7 @@ function VoterDisplay() {
                   className="input-meenal"
                   name="epicId"
                   value={epicId}
-                  onChange={(event) => setepicId(event.target.value)}
+                  onChange={handleChange}
                   type="text"
                 ></input>
               </div>

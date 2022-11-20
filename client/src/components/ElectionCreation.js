@@ -31,6 +31,7 @@ function ElectionCreation() {
                 formValues.end_time
             ).send({ from: myAccount, gas: 800000 });
         console.log("Election Created");
+        alert("Election Created!")
 
         setIsSubmit(true);
     };
@@ -39,6 +40,7 @@ function ElectionCreation() {
         if (Object.keys(formErrors).length === 0 && isSubmit) {
             console.log(formValues);
         }
+        // eslint-disable-next-line
     }, [formErrors]);
     const validate = (values) => {
         const errors = {};
@@ -60,8 +62,10 @@ function ElectionCreation() {
         return errors;
     };
     useEffect(() => {
-        if (localStorage.getItem("adminLogin") !== true)
+        
+        if (localStorage.getItem("adminLogin") !== "true")
             navigate("/");
+            // eslint-disable-next-line
     }, []);
     return (<>
         {/* <div className="container">

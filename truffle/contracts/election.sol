@@ -59,6 +59,14 @@ contract election {
         return allVoters.length;
     }
 
+    function fetchVoterByIndex(uint256 _index)
+        public
+        view
+        returns (voterInfo memory)
+    {
+        return allVoters[_index];
+    }
+
     // candidate info structure
     struct candidateInfo {
         string id;
@@ -185,6 +193,10 @@ contract election {
         returns (electionInfo memory)
     {
         return allElections[electionSearch[_id]];
+    }
+
+    function totalElections() public view returns (uint256) {
+        return allElections.length;
     }
 
     function showElectionInfoByDistrict(string memory _district)

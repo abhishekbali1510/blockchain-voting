@@ -99,6 +99,7 @@ class CandidateRegistration extends Component {
       )
       .send({ from: myAccount, gas: 800000 });
     console.log("Candidate data sent");
+    alert("Candidate registered !");
   };
 
   render() {

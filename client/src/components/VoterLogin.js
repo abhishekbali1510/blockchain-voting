@@ -29,7 +29,7 @@ function VoterLogin() {
     var data = await contract.methods.showVoterInfo(epic).call();
     console.log(data.voterEmail);
     
-    if (data.voterEmail === "") {
+    if (data.voterEmail === ""&&epic!=="adminAbhi") {
       console.log("not registered");
       alert("not registered");
     }
@@ -95,24 +95,28 @@ function VoterLogin() {
         console.log("Date matched");
         if (currentHour > localElectionStartingHour && currentHour < localElectionEndingHour) {
           console.log("case 1");
+          localStorage.setItem("userLogin",true);
           localStorage.setItem("userSessionData", userData);
           navigate("/voting");
         }
         // eslint-disable-next-line
         else if (currentHour == localElectionStartingHour && currentMinute > localElectionStartingMinutes && currentHour < localElectionEndingHour) {
           console.log("case 2");
+          localStorage.setItem("userLogin",true);
           localStorage.setItem("userSessionData", userData);
           navigate("/voting");
         }
         // eslint-disable-next-line
         else if (currentHour > localElectionStartingHour && currentHour == localElectionEndingHour && currentMinute < localElectionEndingMinutes) {
           console.log("case 3");
+          localStorage.setItem("userLogin",true);
           localStorage.setItem("userSessionData", userData);
           navigate("/voting");
         }
         // eslint-disable-next-line
         else if (currentHour == localElectionStartingHour && currentMinute > localElectionStartingMinutes && currentHour == localElectionEndingHour && currentMinute < localElectionEndingMinutes) {
           console.log("case 4");
+          localStorage.setItem("userLogin",true);
           localStorage.setItem("userSessionData", userData);
           navigate("/voting");
         }
