@@ -490,3 +490,17 @@ border-spacing: 1em;
 .tdPadding{
   padding:10px;
 }
+
+/*Election list css */
+.tableDecor{
+  background-color: aliceblue;
+  border-collapse: collapse;
+  max-width: 900px;
+  width: 100%;
+  margin: 2rem auto;
+}
+.tdDecor{
+  border:1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
