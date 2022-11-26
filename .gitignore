@@ -1,0 +1,7 @@
+client/node_modules
+client/public/voterPic
+client/public/candidatePic
+client/public/candidateSymbol
+gethBlockchain/geth
+gethBlockchain/keystore
+
