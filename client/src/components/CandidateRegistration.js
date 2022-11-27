@@ -1,335 +1,314 @@
-import React, { Component } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import { contract, myAccount } from "./Connection";
 import axios from "axios";
 
-class CandidateRegistration extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      first_name: "",
-      last_name: "",
-      Uniq_id: "",
-      email: "",
-      district: "",
-      fatherName: "",
-      dob: "",
-      partyName: "",
-      area_code: "",
-      phone: "",
-      gender: "",
-      image: null,
-      symbol: null,
+function CandidateRegister() {
+    const initialValues = {
+        first_name: "", last_name: "", father_first_name: "", father_last__name: "",
+        Uniq_id: "", email: "", address: "", dob: "", phone: "", gender: "", pname: ""
     };
-  }
-  handleUsernameChange = (event) => {
-    this.setState({ first_name: event.target.value });
-  };
-  handleNameChange = (event) => {
-    this.setState({ last_name: event.target.value });
-  };
-  handleUniqChange = (event) => {
-    this.setState({ Uniq_id: event.target.value });
-  };
-  handleEmailChange = (event) => {
-    this.setState({ email: event.target.value });
-  };
-  handleDistrictChange = (event) => {
-    this.setState({ district: event.target.value });
-  };
-  handleFnameChange = (event) => {
-    this.setState({ fatherName: event.target.value });
-  };
-  handlePartyNameChange = (event) => {
-    this.setState({ partyName: event.target.value });
-  };
-  handleDobChange = (event) => {
-    this.setState({ dob: event.target.value });
-  };
-  handleAreaChange = (event) => {
-    this.setState({ area_code: event.target.value });
-  };
-  handlePhoneChange = (event) => {
-    this.setState({ phone: event.target.value });
-  };
-  handleGChange = (event) => {
-    this.setState({ gender: event.target.value });
-  };
-  handleimageChange = (event) => {
-    this.setState({ image: event.target.files[0] });
-  };
-  handleSymbolChange = (event) => {
-    this.setState({ symbol: event.target.files[0] });
-  };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    // console.log(this.state);
-    var name = this.state.first_name + " " + this.state.last_name;
+    const [formValues, setFormValues] = useState(initialValues);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
 
-    // send registration  mail to candidate
-    const candidateMail = { mail: this.state.email };
-    axios
-      .post("http://localhost:5000/candidateMail", candidateMail, {})
-      .then((res) => console.log(res));
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormValues({ ...formValues, [name]: value });
+        console.log(formValues);
+    };
+    const handleSubmit = (e) => {
+        //e.preventDefault();
+        setFormErrors(validate(formValues));
+        setIsSubmit(true);
 
-    // send image to folder
-    const data = new FormData();
-    data.append("fileImage", this.state.image);
-    data.append("fileSymbol", this.state.symbol);
-    data.append("name", this.state.Uniq_id);
-    console.log(this.state.selectedFile);
-    let url = "http://localhost:8080/candidateUpload.php";
+        // send registration  mail to candidate
+        const candidateMail = { mail: formValues.email };
+        axios
+            .post("http://localhost:5000/candidateMail", candidateMail, {})
+            .then((res) => console.log(res));
 
-    axios.post(url, data, {}).then((res) => {
-      console.log(res);
-    });
+        // send image to folder
+        const data = new FormData();
+        data.append("fileImage", this.state.image);
+        data.append("fileSymbol", this.state.symbol);
+        data.append("name", formValues.Uniq_id);
+        console.log(this.state.selectedFile);
+        let url = "http://localhost:8080/candidateUpload.php";
 
-    // send data to blockchain
-    contract.methods
-      .registerCandidate(
-        this.state.Uniq_id,
-        name,
-        this.state.partyName,
-        this.state.email,
-        this.state.fatherName,
-        this.state.phone,
-        this.state.district,
-        this.state.dob,
-        this.state.gender
-      )
-      .send({ from: myAccount, gas: 800000 });
-    console.log("Candidate data sent");
-    alert("Candidate registered !");
-  };
+        axios.post(url, data, {}).then((res) => {
+            console.log(res);
+        });
 
-  render() {
+        let name = formValues.first_name + " " + formValues.last_name;
+        let fatherName = formValues.father_first_name + " " + formValues.father_last_name;
+        // send data to blockchain
+        contract.methods
+            .registerCandidate(
+                formValues.Uniq_id,
+                name,
+                formValues.pname,
+                formValues.email,
+                fatherName,
+                formValues.phone,
+                formValues.district,
+                formValues.dob,
+                formValues.gender
+            )
+            .send({ from: myAccount, gas: 800000 });
+        console.log("Candidate data sent");
+
+        alert("Registration successful!");
+        //window.location.reload();
+    };
+
+    useEffect(() => {
+        console.log(formErrors);
+        if (Object.keys(formErrors).length === 0 && isSubmit) {
+            console.log(formValues);
+        }
+    }, [formErrors]);
+
+    //Validations
+    const validate = (values) => {
+        const errors = {};
+        const regName = /^[ a-zA-Z\-\’]+$/;
+        const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const phoneNo = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+        // var userName = values.first_name + " " + values.last_name;
+        // var fatherName = values.father_first_name + " " + values.father_last_name;
+
+        if (!values.first_name) {
+            errors.first_name = "Please enter your name!";
+        }
+        if (!values.father_first_name) {
+            errors.father_first_name = "Please enter your father's name!";
+        }
+        if (!values.Uniq_id) {
+            errors.Uniq_id = "Please enter your Unique id!";
+        }
+        if (!values.email) {
+            errors.email = "Please enter your email!";
+        }
+        if (!values.address) {
+            errors.address = "Please enter your address!";
+        }
+        if (!values.dob) {
+            errors.dob = "Please enter your Date of Birth!";
+        }
+        if (!values.phone) {
+            errors.phone = "Please enter your name!";
+        }
+        if (!values.pname) {
+            errors.pname = "Please enter party name!";
+        }
+        return errors;
+    }
+
     return (
-      <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
-        <div className="wrapper wrapper--w790">
-          <div className="card card-5">
-            <div className="card-heading">
-              <h2 className="title">Candidate Registration Form</h2>
-            </div>
-            <div className="card-body">
-              <form method="POST" onSubmit={this.handleSubmit}>
-                <div className="form-row m-b-55">
-                  <div className="name">Name</div>
-                  <div className="value">
-                    <div className="row row-space">
-                      <div className="col-2">
-                        <div className="input-group-desc input-meenal">
-                          <input
-                            className="input--style-5"
-                            type="text"
-                            value={this.state.first_name}
-                            onChange={this.handleUsernameChange}
-                            name="first_name"
-                            // required
-                          ></input>
-                          <label className="label--desc">first name</label>
+        <>
+            <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
+                <button type="button" className="back_button" >Back</button>
+
+                <div className="wrapper wrapper--w790">
+                    <div className="card card-5">
+                        <div className="card-heading">
+                            <h2 className="title">Candidate Registration Form</h2>
                         </div>
-                      </div>
-                      <div className="col-2">
-                        <div className="input-group-desc">
-                          <input
-                            className="input--style-5 input-meenal"
-                            type="text"
-                            value={this.state.last_name}
-                            onChange={this.handleNameChange}
-                            name="last_name"
-                          ></input>
-                          <label className="label--desc">last name</label>
+                        <div className="card-body">
+                            <form method="POST" onSubmit={handleSubmit}>
+                                <div className="form-row m-b-55">
+                                    <div className="name">Name</div>
+                                    <div className="value">
+                                        <div className="row row-space">
+                                            <div className="col-2">
+                                                <div className="input-group-desc">
+                                                    <input className="input--style-5 input-meenal"
+                                                        type="text"
+                                                        value={formValues.first_name}
+                                                        name="first_name"
+                                                        onChange={handleChange} />
+                                                    <label className="label--desc">first name</label>
+                                                </div>
+                                                <br></br><p className="errorColor">{formErrors.first_name}</p>
+                                            </div>
+                                            <div className="col-2">
+                                                <div className="input-group-desc">
+                                                    <input className="input--style-5 input-meenal"
+                                                        type="text"
+                                                        value={formValues.last_name}
+                                                        name="last_name"
+                                                        onChange={handleChange} />
+                                                    <label className="label--desc">last name</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="form-row m-b-55">
+                                    <div className="name">Father's Name</div>
+                                    <div className="value">
+                                        <div className="row row-space">
+                                            <div className="col-2">
+                                                <div className="input-group-desc">
+                                                    <input className="input--style-5 input-meenal"
+                                                        type="text"
+                                                        value={formValues.father_first_name}
+                                                        name="father_first_name"
+                                                        onChange={handleChange} />
+                                                    <label className="label--desc">first name</label>
+                                                </div>
+                                                <br /><p className="errorColor">{formErrors.father_first_name}</p>
+                                            </div>
+                                            <div className="col-2">
+                                                <div className="input-group-desc">
+                                                    <input className="input--style-5 input-meenal"
+                                                        type="text"
+                                                        value={formValues.father_last_name}
+                                                        name="father_last_name"
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label className="label--desc">last name</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="form-row">
+                                    <div className="name">Uniq Id</div>
+                                    <div className="value">
+                                        <div className="input-group">
+                                            <input className="input--style-5 input-meenal"
+                                                type="text"
+                                                value={formValues.Uniq_id}
+                                                onChange={handleChange}
+                                                name="Uniq_id" />
+                                        </div>
+                                        <p className="errorColor">{formErrors.Uniq_id}</p>
+                                    </div>
+                                </div>
+                                <div className="form-row">
+                                    <div class="name">Email</div>
+                                    <div class="value">
+                                        <div className="input-group">
+                                            <input className="input--style-5 input-meenal"
+                                                type="email"
+                                                value={formValues.email}
+                                                name="email"
+                                                onChange={handleChange} />
+                                        </div>
+                                        <p className="errorColor">{formErrors.email}</p>
+                                    </div>
+                                </div>
+                                <div className="form-row">
+                                    <div className="name">Address</div>
+                                    <div className="value">
+                                        <div className="input-group">
+                                            <input className="input--style-5 input-meenal"
+                                                type="address"
+                                                value={formValues.address}
+                                                name="address"
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                        <p className="errorColor">{formErrors.address}</p>
+                                    </div>
+                                </div>
+
+                                <div className="form-row">
+                                    <div className="name">DOB</div>
+                                    <div className="value">
+                                        <div className='input-group'>
+                                            <input className="input--style-5 input-meenal"
+                                                type="date"
+                                                value={formValues.dob}
+                                                name="dob"
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                        <p className="errorColor">{formErrors.dob}</p>
+                                    </div>
+                                </div>
+                                <div className="form-row m-b-55">
+                                    <div className="name">Phone</div>
+                                    <div className="value">
+                                        <div className="input-group-desc">
+                                            <input className="input--style-5 input-meenal"
+                                                type="text"
+                                                name="phone"
+                                                value={formValues.phone}
+                                                onChange={handleChange} />
+                                        </div>
+                                        <p className="errorColor">{formErrors.phone}</p>
+                                    </div>
+                                </div>
+
+                                <div className="form-row">
+                                    <div className="name">Gender</div>
+                                    <div className="value">
+                                        <div className="input-group">
+                                            <div className="rs-select2 js-select-simple select--no-search">
+                                                <select name="subject">
+                                                    <option name="gender" >Choose option</option>
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                    <option>Other</option>
+                                                </select>
+                                                <div className="select-dropdown"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="form-row">
+                                    <div className="name">Image</div>
+                                    <div className="value">
+                                        <div className='input-group'>
+                                            <input className="input--style-5 input-meenal"
+                                                type="file"
+                                                name="image" />
+                                            <form>
+                                                <button type="submit" className='button1'>Upload</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="form-row">
+                                    <div className="name">Party Name</div>
+                                    <div className="value">
+                                        <div className="input-group">
+                                            <input className="input--style-5 input-meenal"
+                                                type="text"
+                                                value={formValues.pname}
+                                                name="pname"
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                        <p className="errorColor">{formErrors.pname}</p>
+                                    </div>
+                                </div>
+                                <div className="form-row">
+                                    <div className="name">Party Symbol</div>
+                                    <div className="value">
+                                        <div className='input-group'>
+                                            <input className="input--style-5 input-meenal"
+                                                type="file"
+                                                name="symbol" />
+                                            <form><button type="submit" className='button1'>Upload</button></form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button className="btn btn--radius-2 btn--red" type="submit">Register</button>
+                                </div>
+                            </form>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="name">Uniq Id</div>
-                  <div className="value">
-                    <div className="input-group">
-                      <input
-                        className="input--style-5 input-meenal"
-                        type="text"
-                        value={this.state.Uniq_id}
-                        onChange={this.handleUniqChange}
-                        name="Uniq_id"
-                        // required
-                      ></input>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="name">Email</div>
-                  <div className="value">
-                    <div className="input-group">
-                      <input
-                        className="input--style-5 input-meenal"
-                        type="email"
-                        value={this.state.email}
-                        onChange={this.handleEmailChange}
-                        name="email"
-                        // required
-                      ></input>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="name">district</div>
-                  <div className="value">
-                    <div className="input-group">
-                      <input
-                        className="input--style-5 input-meenal"
-                        type="text"
-                        value={this.state.district}
-                        onChange={this.handleDistrictChange}
-                        name="district"
-                        // required
-                      ></input>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="name">Father's Name</div>
-                  <div className="value">
-                    <div className="input-group">
-                      <input
-                        className="input--style-5 input-meenal"
-                        type="text"
-                        value={this.state.fatherName}
-                        onChange={this.handleFnameChange}
-                        name="fatherName"
-                        // required
-                      ></input>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="name">DOB</div>
-                  <div className="value">
-                    <div className="input-group">
-                      <input
-                        className="input--style-5 input-meenal"
-                        type="date"
-                        value={this.state.dob}
-                        onChange={this.handleDobChange}
-                        name="dob"
-                        // required
-                      ></input>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row m-b-55">
-                  <div className="name">Phone</div>
-                  <div className="value">
-                    <div className="row row-refine">
-                      <div className="col-3">
-                        <div className="input-group-desc">
-                          <input
-                            className="input--style-5 input-meenal"
-                            type="text"
-                            value={this.state.area_code}
-                            onChange={this.handleAreaChange}
-                            name="area_code"
-                          ></input>
-                          <label className="label--desc">Area Code</label>
-                        </div>
-                      </div>
-                      <div className="col-9">
-                        <div className="input-group-desc">
-                          <input
-                            className="input--style-5 input-meenal"
-                            type="text"
-                            value={this.state.phone}
-                            onChange={this.handlePhoneChange}
-                            name="phone"
-                            // required
-                          ></input>
-                          <label className="label--desc">Phone Number</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="name">Gender</div>
-                  <div className="value">
-                    <div className="input-group">
-                      <div className="rs-select2 js-select-simple select--no-search">
-                        <select name="subject">
-                          <option
-                            value={this.state.gender}
-                            onChange={this.handleGChange}
-                            name="gender"
-                            // required
-                          >
-                            Choose option
-                          </option>
-                          <option>Male</option>
-                          <option>Female</option>
-                          <option>Other</option>
-                        </select>
-                        <div className="select-dropdown"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="name">Image</div>
-                  <div className="value">
-                    <div className="input-group">
-                      <input
-                        className="input--style-5 input-meenal"
-                        type="file"
-                        onChange={this.handleimageChange}
-                        name="image"
-                        // required
-                      ></input>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="name">Party Name</div>
-                  <div className="value">
-                    <div className="input-group">
-                      <input
-                        className="input--style-5 input-meenal"
-                        type="text"
-                        value={this.state.partyName}
-                        onChange={this.handlePartyNameChange}
-                        name="partyName"
-                        // required
-                      ></input>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="name">Party Symbol</div>
-                  <div className="value">
-                    <div className="input-group">
-                      <input
-                        className="input--style-5 input-meenal"
-                        type="file"
-                        onChange={this.handleSymbolChange}
-                        name="symbol"
-                        // required
-                      ></input>
-                    </div>
-                  </div>
                 </div>
                 <div>
-                  <button className="btn btn--radius-2 btn--red" type="submit">
-                    Register
-                  </button>
                 </div>
-              </form>
             </div>
-          </div>
-        </div>
-        <div></div>
-      </div>
-    );
-  }
+        </>
+    )
 }
-
-export default CandidateRegistration;
+export default CandidateRegister;
