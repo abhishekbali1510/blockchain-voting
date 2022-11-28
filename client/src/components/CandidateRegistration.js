@@ -5,8 +5,8 @@ import axios from "axios";
 
 function CandidateRegister() {
     const initialValues = {
-        first_name: "", last_name: "", father_first_name: "", father_last__name: "",
-        Uniq_id: "", email: "", address: "", dob: "", phone: "", gender: "", pname: ""
+        first_name: "", last_name: "", father_first_name: "", father_last_name: "",
+        Uniq_id: "", email: "", district: "", dob: "", phone: "", gender: "", pname: ""
     };
 
     const [formValues, setFormValues] = useState(initialValues);
@@ -19,27 +19,26 @@ function CandidateRegister() {
         console.log(formValues);
     };
     const handleSubmit = (e) => {
-        //e.preventDefault();
+        e.preventDefault();
         setFormErrors(validate(formValues));
-        setIsSubmit(true);
 
         // send registration  mail to candidate
         const candidateMail = { mail: formValues.email };
         axios
-            .post("http://localhost:5000/candidateMail", candidateMail, {})
+            .post("http://127.0.0.1:5000/candidateMail", candidateMail, {})
             .then((res) => console.log(res));
 
         // send image to folder
-        const data = new FormData();
-        data.append("fileImage", this.state.image);
-        data.append("fileSymbol", this.state.symbol);
-        data.append("name", formValues.Uniq_id);
-        console.log(this.state.selectedFile);
-        let url = "http://localhost:8080/candidateUpload.php";
+        // const data = new FormData();
+        // data.append("fileImage", this.state.image);
+        // data.append("fileSymbol", this.state.symbol);
+        // data.append("name", formValues.Uniq_id);
+        // console.log(this.state.selectedFile);
+        // let url = "http://192.168.43.171:8080/candidateUpload.php";
 
-        axios.post(url, data, {}).then((res) => {
-            console.log(res);
-        });
+        // axios.post(url, data, {}).then((res) => {
+        //     console.log(res);
+        // });
 
         let name = formValues.first_name + " " + formValues.last_name;
         let fatherName = formValues.father_first_name + " " + formValues.father_last_name;
@@ -61,6 +60,8 @@ function CandidateRegister() {
 
         alert("Registration successful!");
         //window.location.reload();
+        setIsSubmit(true);
+
     };
 
     useEffect(() => {
@@ -91,8 +92,8 @@ function CandidateRegister() {
         if (!values.email) {
             errors.email = "Please enter your email!";
         }
-        if (!values.address) {
-            errors.address = "Please enter your address!";
+        if (!values.district) {
+            errors.district = "Please enter your district!";
         }
         if (!values.dob) {
             errors.dob = "Please enter your Date of Birth!";
@@ -117,7 +118,7 @@ function CandidateRegister() {
                             <h2 className="title">Candidate Registration Form</h2>
                         </div>
                         <div className="card-body">
-                            <form method="POST" onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit}>
                                 <div className="form-row m-b-55">
                                     <div className="name">Name</div>
                                     <div className="value">
@@ -189,8 +190,8 @@ function CandidateRegister() {
                                     </div>
                                 </div>
                                 <div className="form-row">
-                                    <div class="name">Email</div>
-                                    <div class="value">
+                                    <div className="name">Email</div>
+                                    <div className="value">
                                         <div className="input-group">
                                             <input className="input--style-5 input-meenal"
                                                 type="email"
@@ -202,17 +203,17 @@ function CandidateRegister() {
                                     </div>
                                 </div>
                                 <div className="form-row">
-                                    <div className="name">Address</div>
+                                    <div className="name">district</div>
                                     <div className="value">
                                         <div className="input-group">
                                             <input className="input--style-5 input-meenal"
-                                                type="address"
-                                                value={formValues.address}
-                                                name="address"
+                                                type="text"
+                                                value={formValues.district}
+                                                name="district"
                                                 onChange={handleChange}
                                             />
                                         </div>
-                                        <p className="errorColor">{formErrors.address}</p>
+                                        <p className="errorColor">{formErrors.district}</p>
                                     </div>
                                 </div>
 
@@ -267,9 +268,9 @@ function CandidateRegister() {
                                             <input className="input--style-5 input-meenal"
                                                 type="file"
                                                 name="image" />
-                                            <form>
+                                            
                                                 <button type="submit" className='button1'>Upload</button>
-                                            </form>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -294,7 +295,7 @@ function CandidateRegister() {
                                             <input className="input--style-5 input-meenal"
                                                 type="file"
                                                 name="symbol" />
-                                            <form><button type="submit" className='button1'>Upload</button></form>
+                                            <button type="submit" className='button1'>Upload</button>
                                         </div>
                                     </div>
                                 </div>
