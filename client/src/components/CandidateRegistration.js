@@ -9,9 +9,15 @@ function CandidateRegister() {
         Uniq_id: "", email: "", district: "", dob: "", phone: "", gender: "", pname: ""
     };
 
+    const [selectedFile, setSelectedFile] = useState(null);
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
+
+   const handleimageChange = (event) => {
+    this.setState({ selectedFile: event.target.files[0] });
+     };
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -58,7 +64,7 @@ function CandidateRegister() {
             .send({ from: myAccount, gas: 800000 });
         console.log("Candidate data sent");
 
-        alert("Registration successful!");
+        //alert("Registration successful!");
         //window.location.reload();
         setIsSubmit(true);
 
@@ -77,30 +83,48 @@ function CandidateRegister() {
         const regName = /^[ a-zA-Z\-\’]+$/;
         const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         const phoneNo = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
-        // var userName = values.first_name + " " + values.last_name;
-        // var fatherName = values.father_first_name + " " + values.father_last_name;
+        var userName = values.first_name + " " + values.last_name;
+        var fatherName = values.father_first_name + " " + values.father_last_name;
 
         if (!values.first_name) {
             errors.first_name = "Please enter your name!";
-        }
+        }else if (!regName.test(values.userName)) {
+            errors.first_name = "Please enter valid name!";
+          }
+
         if (!values.father_first_name) {
             errors.father_first_name = "Please enter your father's name!";
-        }
+        }else if (!regName.test(values.fatherName)) {
+            errors.father_first_name = "Please enter valid name!";
+          }
+          
         if (!values.Uniq_id) {
             errors.Uniq_id = "Please enter your Unique id!";
-        }
+        }else if (values.Uniq_id.trim().length != 4) {
+            errors.Uniq_id = "Please enter a valid uniq id!";
+          }
+
         if (!values.email) {
             errors.email = "Please enter your email!";
-        }
+        }else if (!mailFormat.test(values.email)) {
+            errors.email = "Please enter valid name!";
+          }
+
         if (!values.district) {
             errors.district = "Please enter your district!";
+        }else if (!regName.test(values.district)) {
+            errors.district = "Please enter valid name!";
         }
+
         if (!values.dob) {
             errors.dob = "Please enter your Date of Birth!";
         }
         if (!values.phone) {
             errors.phone = "Please enter your name!";
+        }else if (!phoneNo.test(values.phone)) {
+            errors.phone = "Please enter valid phone number!";
         }
+
         if (!values.pname) {
             errors.pname = "Please enter party name!";
         }
@@ -267,8 +291,9 @@ function CandidateRegister() {
                                         <div className='input-group'>
                                             <input className="input--style-5 input-meenal"
                                                 type="file"
-                                                name="image" />
-                                            
+                                                name="image"
+						value={formValues.selectedFile}
+                                  		onChange={(e) => setSelectedFile(e.target.files[0])}  />
                                                 <button type="submit" className='button1'>Upload</button>
                                             
                                         </div>
@@ -294,7 +319,9 @@ function CandidateRegister() {
                                         <div className='input-group'>
                                             <input className="input--style-5 input-meenal"
                                                 type="file"
-                                                name="symbol" />
+                                                name="symbol"
+						value={formValues.selectedFile}
+                                  		onChange={(e) => setSelectedFile(e.target.files[0])}  />
                                             <button type="submit" className='button1'>Upload</button>
                                         </div>
                                     </div>
