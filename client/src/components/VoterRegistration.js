@@ -8,10 +8,14 @@ function VoterRegister() {
     Epic_id: "", first_name: "", last_name: "", father_first_name: "", father_last_name: "",
     email: "", district: "", dob: "", phone: "", gender: "male"
   };
-
+  const [selectedFile, setSelectedFile] = useState(null);
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+
+  const handleimageChange = (event) => {
+    this.setState({ selectedFile: event.target.files[0] });
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,7 +60,7 @@ function VoterRegister() {
       .send({ from: myAccount, gas: 800000 });
     console.log("data sent");
 
-    alert("Registration successful!");
+    //alert("Registration successful!");
     //window.location.reload();
     setIsSubmit(true);
   };
@@ -305,7 +309,7 @@ function VoterRegister() {
                         type="file"
                         value={formValues.selectedFile}
                         name="image"
-                        onChange={handleChange}
+                        onChange={(e) => setSelectedFile(e.target.files[0])}
                       />
                       <br />
                     </div>
