@@ -47,6 +47,14 @@ function Result() {
                     setElectionDate(localData.electionDate);
             }
         }
+       
+        fetchAllCandidates();
+        fetchElectionDate();
+        
+        // eslint-disable-next-line
+    }, [])
+
+    useEffect(()=>{
         async function fetchTotalVoters() {
 
             for (let i = 0; i < await contract.methods.totalVoters().call(); i++) {
@@ -57,11 +65,8 @@ function Result() {
                     setTotalVoters(totalVoters+1);
             }
         }
-        fetchAllCandidates();
-        fetchElectionDate();
         fetchTotalVoters();
-        // eslint-disable-next-line
-    }, [])
+    },[electionResults]);
     return (
         <>
             <center>

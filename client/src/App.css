@@ -397,7 +397,7 @@ hr {
   }
   .back_color{
     background-color: #1E90FF;
-    height: 780px;
+    /* height: 780px; */
   }
   .infor{
     width: 180x;
@@ -410,7 +410,7 @@ hr {
   .table1{
     background-color: whitesmoke;
     align-items: center;
-    height:375px;   
+    /* height:375px;    */
     align-self: center;
     margin: auto;
     width: 50%;

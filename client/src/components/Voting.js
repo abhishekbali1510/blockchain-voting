@@ -113,7 +113,7 @@ function Voting() {
       <img className="logoVoting" alt="voting logo" src={vote_logo}></img>
       <div className="infor">
         <b>
-          <i>{totalCandidates}</i><br />
+          <br />
         </b>
         {/*<b> NAME: {localStorage.getItem("userSessionData").split(',')[1]}</b>
         <br />

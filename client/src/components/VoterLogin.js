@@ -125,7 +125,8 @@ function VoterLogin() {
         }
       }
       else {
-        console.log("Date not matched")
+        console.log("Date not matched");
+        navigate("/noVoting");
       }
     }
     else {

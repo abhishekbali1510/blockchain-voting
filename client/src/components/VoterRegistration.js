@@ -22,7 +22,7 @@ function VoterRegister() {
     setFormValues({ ...formValues, [name]: value });
     console.log(formValues);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     
@@ -30,23 +30,23 @@ function VoterRegister() {
     // send registration  mail to voter
     const votermail = { mail: formValues.email };
     axios
-      .post("http://127.0.0.1:5000/mail", votermail, {})
+      .post("http://192.168.0.112:5000/mail", votermail, {})
       .then((res) => console.log(res));
 
     // send image to folder
-    // const data = new FormData();
-    // data.append("file", this.state.selectedFile);
-    // data.append("name", formValues.Epic_id);
-    // console.log(this.state.selectedFile);
-    // let url = "http://192.168.43.171:8080/upload.php";
+    const data = new FormData();
+    data.append("file", selectedFile);
+    data.append("name", formValues.Epic_id);
+    console.log(selectedFile);
+    let url = "http://192.168.0.112:8080/upload.php";
 
-    // axios.post(url, data, {}).then((res) => {
-    //   console.log(res);
-    // });
+    axios.post(url, data, {}).then((res) => {
+      console.log(res);
+    });
     let name = formValues.first_name + " " + formValues.last_name;
     let fatherName = formValues.father_first_name + " " + formValues.father_last_name;
     // send data to blockchain
-    contract.methods
+    console.log(await contract.methods
       .registerVoter(
         formValues.Epic_id,
         name,
@@ -57,11 +57,11 @@ function VoterRegister() {
         formValues.district,
         formValues.gender
       )
-      .send({ from: myAccount, gas: 800000 });
+      .send({ from: myAccount, gas: 800000 }));
     console.log("data sent");
 
-    //alert("Registration successful!");
-    //window.location.reload();
+    alert("Registration successful!");
+    // window.location.reload();
     setIsSubmit(true);
   };
 
@@ -83,9 +83,9 @@ function VoterRegister() {
 
     if (!values.Epic_id) {
       errors.Epic_id = "Please enter your Epic id!";
-    } else if (values.Epic_id.trim().length != 10) {
-      errors.Epic_id = "Please enter a valid epic id!";
-    }
+     }// else if (values.Epic_id.trim().length != 10) {
+    //   errors.Epic_id = "Please enter a valid epic id!";
+    // }
 
     if (!values.first_name) {
       errors.first_name = "Please enter your name!";
