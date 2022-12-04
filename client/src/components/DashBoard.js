@@ -1,11 +1,22 @@
-import React from 'react'
-import voter_register from './voter_registration.PNG'
-import voter_display from './voter_display.png'
-import create_election from './create_election.jpg'
-import election_list from './election_list.png'
-import candidate_register from './candidate_register.png'
-import logout from './logout.jpg'
+import React, { useState,useEffect } from "react";
+import {useNavigate} from "react-router-dom";
+let voter_register = '/Images/voter_registration.PNG'
+let voter_display  ='/Images/voter_display.png'
+let create_election = '/Images/create_election.jpg'
+let election_list  ='/Images/election_list.png'
+let candidate_register = '/Images/candidate_register.png'
+let logout = '/Images/logout.jpg'
 function DashBoard() {
+
+    let navigate=useNavigate();
+  useEffect(() => {
+    
+    // console.log(localStorage.getItem("adminLogin"));
+    if (localStorage.getItem("adminLogin") !== "true") {
+      navigate("/");
+    }
+
+  });
   return (
     <>
     <div className='dashboard_div'>

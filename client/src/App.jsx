@@ -12,7 +12,9 @@ import Voting from "./components/Voting";
 import ElectionCreation from "./components/ElectionCreation";
 import VoteCounted from "./components/VoteCounted";
 import NoVoting from "./components/NoVoting";
+import ElectionList from "./components/ElectionList";
 import Result from "./components/Result";
+import DashBoard from "./components/DashBoard";
 
 function App() {
   return (
@@ -42,6 +44,10 @@ function App() {
         <Route path="/voteCounted" element={<VoteCounted />} />
 
         <Route path="/noVoting" element={<NoVoting />} />
+
+        <Route path="/list" element={<ElectionList />} />
+
+        <Route path="/admin" element={<DashBoard />} />
 
         <Route path="/result/:electionDistrict" element={<Result />} />
       </Routes>

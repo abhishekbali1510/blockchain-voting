@@ -24,7 +24,7 @@ function VoterLogin() {
     if(epic==="adminAbhi")
     {
       localStorage.setItem("adminLogin",true);
-      navigate("/voterDisplay");
+      navigate("/admin");
     }
     var data = await contract.methods.showVoterInfo(epic).call();
     console.log(data.voterEmail);
