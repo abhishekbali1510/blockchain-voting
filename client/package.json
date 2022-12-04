@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.2.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "apexcharts": "^3.36.3",
     "axios": "^0.27.2",
+    "mdb-react-ui-kit": "^5.0.0",
     "nodemailer": "^6.7.7",
     "react": "^18.1.0",
     "react-apexcharts": "^1.4.0",
