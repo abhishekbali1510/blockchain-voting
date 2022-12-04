@@ -504,3 +504,45 @@ border-spacing: 1em;
   padding: 8px;
   text-align: center;
 }
+/*DashBoard Css*/
+.back_button{
+  padding: 15px 32px;
+  size: 1420px;
+  margin-left: 20px;
+  background-color: #62696b;
+  color: azure;
+  border-radius: 10px;
+}
+
+.dashboard_div{
+  background-color:#62696b;
+  height: 90px;
+  width:100%;
+}
+.dashboard_heading{
+  text-align: center;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-shadow: 2px 2px blue;
+  font-size: 45px;
+}
+.card_img{
+  border-top-left-radius: calc(0.5rem - 1px);
+  border-top-right-radius: calc(0.5rem - 1px);
+  width: 100%;
+  margin:0;
+  padding:0;
+  height: 275px;
+}
+.nav_button{
+  border:0;
+  color: #fff;
+  background-color: #3b71ca;
+  box-shadow: 0 4px 9px -4px #3b71ca;
+  text-transform: uppercase;
+  vertical-align: bottom;
+  font-weight: 500;
+  padding: 0.625rem 1.5rem 0.5rem 1.5rem;
+  font-size: .75rem;
+  line-height: 1.5;
+  border-radius: 2px;
+}
