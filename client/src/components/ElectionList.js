@@ -57,6 +57,7 @@ function ElectionList() {
     return (
         <>
             <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
+ 		<button type="button" className="back_button" >Back</button>
                 <center>
                 <h1 className="h1Class">ELECTION LIST</h1>
                 </center>
