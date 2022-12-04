@@ -77,6 +77,7 @@ function ElectionCreation() {
       )}
     </div>*/}
         <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
+	<button type="button" className="back_button" >Back</button>
             <div className="wrapper wrapper--w790">
                 <div className="card card-5">
                     <div className="card-heading">
@@ -91,7 +92,7 @@ function ElectionCreation() {
                                 <div className="value">
                                     <div className="input-group">
                                         <input
-                                            className="input--style-5"
+                                            className="input--style-5 input-meenal"
                                             type="text"
                                             name="e_name"
                                             value={formValues.e_name}
@@ -106,7 +107,7 @@ function ElectionCreation() {
                                 <div className="value">
                                     <div className="input-group">
                                         <input
-                                            className="input--style-5"
+                                            className="input--style-5 input-meenal"
                                             type="text"
                                             name="district"
                                             value={formValues.district}
@@ -122,7 +123,7 @@ function ElectionCreation() {
                                 <div className="value">
                                     <div className='input-group'>
                                         <input
-                                            className='input--style-5'
+                                            className='input--style-5 input-meenal'
                                             type="date"
                                             name="e_date"
                                             value={formValues.e_date}
