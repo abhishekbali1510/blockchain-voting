@@ -52,8 +52,9 @@ function VoterDisplay() {
   return (
     <>
       <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
+  <button type="button" className="back_button" >Back</button>
         <div className="wrapper wrapper--w790">
-          <h1 align="center"><b>Voter's Data</b></h1>
+          <h1 align="center"><b>VOTER INFORMATION</b></h1>
           <div>
             <form onSubmit={handleSubmit}>
               <div>
